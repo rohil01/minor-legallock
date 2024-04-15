@@ -10,6 +10,7 @@ let web3;
         web3 = new Web3(window.ethereum);
     } else {
         // MetaMask is not installed, show error message
+        alert('MetaMask is not installed or not detected.');
         console.error('MetaMask is not installed or not detected.'); //show in page
         // Fallback to local provider
         const provider = new Web3.providers.HttpProvider('https://sepolia.infura.io/v3/0fccb03fc04448f0a6cf2e8ee8d9c990'); // You can change this to your desired Ethereum node URL

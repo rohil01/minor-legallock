@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import { useState, useEffect } from 'react';
-import { Navigate, redirect, useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import './Loginform.css';
 import logo from '../../Assets/metamask.svg'
 import { MdAccountCircle } from "react-icons/md";
@@ -15,60 +15,61 @@ class Loginform extends Component{
   
   state={
     manager:'',
-    loading:'Log in Through Metamask',
+    loading:'Log in',
     id:'',
-    userAddress:'',
-    // navigate: useNavigate()
+    userAddress:''
   }
+  static async getInitialProps(){
+    const admin = await minor.methods.admin().call();
+    
+  }
+  async componentDidMount() {
+    try {
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+      const add = accounts[0]; // Assuming user has at least one address
+      // console.log(add);
+      this.setState({ userAddress: add }); // Use await to ensure state update
+      let index= await minor.methods.id(accounts[0]).call();
+      this.setState({id:parseInt(index)});
+    } catch (error) {
+      if (error.code === 4001) {
+        alert("Account access denied.");
+      } else {
+        console.error('Error:', error);
+      }
+    }
+  }
+  
   onSubmit = async (event)=>{
     event.preventDefault();
-    // console.log("he")
     
-    // setLoading('Loading...')
-    if (typeof window !== 'undefined' && typeof window.ethereum !== 'undefined'){
+    setTimeout(async ()=>{
+      // console.log(this.state.userAddress)
+      
+      // console.log("index:",index)
+      if(this.state.id==0){
+        //show alert and redirect to register page
+        alert("You are not registered. Please sign up first.");
+        window.location.href = '/signup'; 
+      }
+      else{
       //redirect to next page
-      let add='';
-      window.ethereum.request({ method: 'eth_requestAccounts' })
-        .then((accounts) => {
-            // Access to accounts granted
-            add = accounts[0]; // Assuming user has at least one address
-            // console.log("User's address:", add); //users address
-            
-            // setUserAddress(add);
-            
-        })
-        .catch((error) => {
-            // User denied account access
-            if (error.code === 4001) {
-              alert("Account access denied.");
-            } else {
-              console.error('Error:', error);
-            }
-        });
-      //condition change krlio if ki 
+        
+        this.setState({loading:'redirecting to next page'})
+        // Redirect to dashboard screen after a 5-second delay
+        setTimeout(() => {
+          window.location.href = '/dashboard'; 
+          console.log("redirecting")
+        }, 5000);
+      }
+      },1000);
     
-    // console.log(this.userAddress);
-    const admin = await minor.methods.admin().call();
-    const index= await minor.methods.id(add).call();
-    if(index==0){
-      //show alert and redirect to register page
-      alert("You are not registered. Please sign up first.");
-      // this.state.navigate('/signup');
-    }
-    else{
-    //redirect to next page
-      // setLoading('redirecting to next page')
-      // Redirect to dashboard screen after a 5-second delay
-      // setTimeout(() => {
-      //   this.state.navigate('/dashboard');
-      // }, 5000);
-    }
-    console.log(index);
-    }
-    else{
-      console.log("Create Metamask Account")
-    }
-  }
+    // console.log(index);
+    
+    
+    
+    
+  };
 
       
       
@@ -97,5 +98,6 @@ class Loginform extends Component{
   }  
 };
 
-export default Loginform;
+export default (Loginform); // Wrap your component with withRouter to access history prop
+
 

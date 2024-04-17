@@ -33,6 +33,7 @@ const Profile = () => {
       <p>Name: {user.name}</p>
       <p>Age: {user.age}</p>
       <p>Adhaar: {user.adhaar}</p>
+      
     </div>
   );
 };

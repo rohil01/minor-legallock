@@ -6,6 +6,7 @@ import logo from '../../Assets/metamask.svg'
 import { MdAccountCircle } from "react-icons/md";
 import web3 from '../../web3';
 import minor from '../../minor'
+import {Form,Input,Message , Button} from 'semantic-ui-react';
 
 class Loginform extends Component{
 //   const [manager,setManager]= useState('') //managers address
@@ -98,6 +99,6 @@ class Loginform extends Component{
   }  
 };
 
-export default (Loginform); // Wrap your component with withRouter to access history prop
+export default (Loginform);
 
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 //import { withRouteru} from 'react-router-dom';
 import './SignupForm.css'; 
+import { Link } from 'react-router-dom';
 
 class SignupForm extends Component {
   constructor(props) {
@@ -87,7 +88,7 @@ class SignupForm extends Component {
           <button type='submit'>Signup</button>
 
           <div className='login-link' onClick={this.handleLoginClick}>
-            <p>Already have an account? <a href='#'>Login</a></p>
+            <p>Already have an account? <Link to ="/">Login</Link></p>
           </div>
         </form>
       </div>

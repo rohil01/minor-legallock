@@ -27,6 +27,7 @@ class SignupForm extends Component {
     // json temporary to backend here
     //localStorage.setItem('signupData', JSON.stringify(this.state));
     console.log('Form submitted:', this.state);
+    alert("You will be registered within 2 days!");
     //this.props.history.push('/');
   };
 

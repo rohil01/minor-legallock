@@ -5,6 +5,8 @@ import SignupForm from './Components/SignupForm/SignUpForm';
 import DashboardScreen from './screens/DashboardScreen';
 import FileListScreen from './screens/FileListScreen';
 import UploadFileScreen from './screens/UploadFileScreen';
+import Profile from './Components/Profilepage/Profile';
+import Home from './Components/Home/Home';
 
 
 const App = () => {
@@ -20,6 +22,8 @@ const App = () => {
         <Route path="/dashboard" element={<DashboardScreen />} />
         <Route path="/filelist" element={<FileListScreen />} />
         <Route path="/uploadfile" element={<UploadFileScreen />} />
+        <Route path="/profile/:id" element={<Profile />} />
+        <Route path="/Home" element={<Home />} />
       </Routes>
     </Router>
     </div>

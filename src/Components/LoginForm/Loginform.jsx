@@ -7,6 +7,7 @@ import { MdAccountCircle } from "react-icons/md";
 import web3 from '../../web3';
 import minor from '../../minor'
 import {Form,Input,Message , Button} from 'semantic-ui-react';
+//import { Loader } from 'semantic-ui-react';
 
 class Loginform extends Component{
 //   const [manager,setManager]= useState('') //managers address
@@ -16,7 +17,7 @@ class Loginform extends Component{
   
   state={
     manager:'',
-    loading:'Log in',
+    loading:'Login',
     id:'',
     userAddress:''
   }
@@ -61,10 +62,9 @@ class Loginform extends Component{
         setTimeout(() => {
           window.location.href = '/dashboard'; 
           console.log("redirecting")
-        }, 5000);
+        }, 2000);
       }
       },1000);
-    
     // console.log(index);
     
     
@@ -85,7 +85,8 @@ class Loginform extends Component{
                   <img src ={logo} className='login-icon' alt='logo' />
               </div>
 
-              <button type='submit'>{this.state.loading}</button>
+              <Button primary loading={this.state.loading}type='submit'>{this.state.loading}
+                </Button>
 
               <div className='register-link'>
                   <p>Don't have a MetaMask account? 

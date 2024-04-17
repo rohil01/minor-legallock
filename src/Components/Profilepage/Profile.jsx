@@ -9,11 +9,10 @@ const Profile = () => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      try {
-        const accounts = await web3.eth.getAccounts();
-        const userAddress = accounts[0];
-        const userDetails = await minor.methods.members(id).call({ from: userAddress });
+      try {       
+        const userDetails = await minor.methods.members(id-1).call();
         setUser(userDetails);
+        console.log(userDetails);
       } catch (error) {
         console.error('Error fetching user details:', error);
       }
@@ -29,10 +28,10 @@ const Profile = () => {
   return (
     <div>
       <h1>Profile</h1>
-      <p>ID: {user.id}</p>
+      <p>ID: {parseInt(user.id)}</p>
       <p>Name: {user.name}</p>
-      <p>Age: {user.age}</p>
-      <p>Adhaar: {user.adhaar}</p>
+      <p>Age: {parseInt(user.age)}</p>
+      <p>Adhaar: {parseInt(user.adhaar)}</p>
       
     </div>
   );

@@ -7,20 +7,29 @@ import search_icon_light from '../../Assets/search-w.png';
 import search_icon_dark from '../../Assets/search-b.png';
 import toggle_light from '../../Assets/night.png';
 import toggle_dark from '../../Assets/day.png';
-//import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import Profile from '../Profilepage/Profile';
 import Home from '../Home/Home';
+import minor from '../../minor'
 
 const Navbar = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
-  //const currentUser = useSelector((state) => state.user.currentUser);
+  // const currentUser = useSelector((state) => state.user.currentUser);
 
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
   };
 
-  const handleProfileClick = () => {
-    window.location.href = `/Profile/${currentUser.id}`;
+  const handleProfileClick = async () => {
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    const add = accounts[0]; // Assuming user has at least one address
+    // console.log(add);
+    
+    let index= await minor.methods.id(accounts[0]).call();
+    
+    window.location.href = `/Profile/${index}`;
+    // console.log("hello")
+    // alert("fuck off");
   };
 
   return (
@@ -28,7 +37,7 @@ const Navbar = () => {
       <img src={isDarkMode ? logo_dark : logo_light} style={{ width: '200px', height: 'auto' }} alt="LegalLock " className="logo" />
       <ul>
         <li><Link to="/Home">Home</Link></li>
-        <li onClick={{handleProfileClick}}>Profile</li>
+        <li onClick={handleProfileClick}>Profile</li>
       </ul>
 
       <div className="search-box">

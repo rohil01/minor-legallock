@@ -35,7 +35,7 @@ contract Minor {
         // id[msg.sender]=0;
         
         member storage newMember= members.push();
-        uint memberId= members.length+1;
+        uint memberId= members.length;
         
         newMember.name= name;
         newMember.adhaar=adhaar;

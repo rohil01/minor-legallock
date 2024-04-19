@@ -46,3 +46,24 @@ contract Minor {
         id[add]= memberId;
     }
 }   
+
+contract File{
+    struct fileDetails{
+        string addr;
+        uint dateTime;
+        address addrUpload;
+        bool exist;
+    }
+    mapping(string => fileDetails)fileMap;
+    
+    function upload(string memory url) public view returns(fileDetails memory){
+        fileDetails memory file; 
+        file.addr= url;
+        file.dateTime= block.timestamp;
+        file.addrUpload= msg.sender;
+        file.exist= true;
+        return file;
+    }    
+
+}
+

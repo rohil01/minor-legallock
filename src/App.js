@@ -7,6 +7,9 @@ import FileListScreen from './screens/FileListScreen';
 import UploadFileScreen from './screens/UploadFileScreen';
 import Profile from './Components/Profilepage/Profile';
 import Home from './Components/Home/Home';
+import UploadFile from './screens/uploadFile';
+import ViewFile from './screens/viewFile';
+import DeleteFile from './screens/deleteFile';
 
 
 const App = () => {

@@ -4,7 +4,7 @@ import Upload from './upload';
 
 function View() {
   const [pin, setPin] = useState([]);
-  const [star, setStar] = useState(0);
+  const [star, setStar] = useState(1);
   const [pinsFetched, setPinsFetched] = useState(false); // State to track if pins have been fetched
   const [loading, setLoading] = useState(true); // State to track loading state
 
@@ -82,9 +82,7 @@ function View() {
       )}
       <div className="file-container">
         <h1>Files List</h1>
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
+        {
           pin.map((value, index) => (
             <ul key={index}>
               <a href={`${process.env.REACT_APP_URL}/ipfs/${value}`} target="_blank" rel="noopener noreferrer">
@@ -92,7 +90,7 @@ function View() {
               </a>
             </ul>
           ))
-        )}
+        }
       </div>
     </>
   );

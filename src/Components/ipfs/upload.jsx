@@ -1,7 +1,36 @@
+import React, { useEffect } from 'react';
 import { useState } from "react"
+import '../ipfs/view.css'
 
-function Upload() {
+
+function View(props) {
   const [selectedFile, setSelectedFile] = useState()
+  const [cid, setCid] = useState()
+//   const uploadToBlockchain = async ipfsHash=>{
+//     try {
+//     const response = await fetch(
+//       "YOUR_CONTRACT_ADDRESS", // Replace with your contract address
+//       {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json"
+//         },
+//         body: JSON.stringify({
+//           ipfsHash: ipfsHash
+//         })
+//       }
+//     );
+
+//     if (response.ok) {
+//       console.log("IPFS hash uploaded to blockchain successfully");
+//     } else {
+//       console.log("Error uploading IPFS hash to blockchain");
+//     }
+//   } catch (error) {
+//     console.log("Error uploading IPFS hash to blockchain:", error);
+//     }
+//   };
+//   }
   const changeHandler = event => {
     setSelectedFile(event.target.files[0])
   }
@@ -29,20 +58,27 @@ function Upload() {
           body: formData
         }
       )
-      const resData = await res.json()
-      console.log(resData)
-    } catch (error) {
-      console.log(error)
+        const resData = await res.json()
+        setCid(resData.IpfsHash)
+        console.log(resData)
+        props.fetchPins();
+        //await uploadToBlockchain(resData.IpfsHash);
+      } catch (error) {
+        console.log(error)
     }
   }
-
   return (
     <>
-      <label className="form-label"> Choose File</label>
-      <input type="file" onChange={changeHandler} />
-      <button onClick={handleSubmission}>Submit</button>
-    </>
-  )
+  <div className="upload-container">
+  <p>Please upload your file:</p>
+  <label className="form-label">
+    <input className="button" type="file" onChange={changeHandler} />
+  </label>
+  <button className="button" onClick={handleSubmission}>Submit</button>
+</div>
+
+</>
+  );
 }
 
-export default Upload
+export default View

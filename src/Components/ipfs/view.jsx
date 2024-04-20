@@ -1,103 +1,102 @@
-import React from 'react';
-import { useState } from "react"
-import '../ipfs/view.css'
+import React, { useEffect, useState } from 'react';
+import '../ipfs/view.css';
+import Upload from './upload';
 
 function View() {
-  const [selectedFile, setSelectedFile] = useState()
-  const [cid, setCid] = useState()
-  const changeHandler = event => {
-    setSelectedFile(event.target.files[0])
-  }
+  const [pin, setPin] = useState([]);
+  const [star, setStar] = useState(0);
+  const [pinsFetched, setPinsFetched] = useState(false); // State to track if pins have been fetched
+  const [loading, setLoading] = useState(true); // State to track loading state
 
-  const handleSubmission = async () => {
+  const PINATA_JWT = `Bearer ${process.env.REACT_APP_JWT}`;
+  const PIN_QUERY = `https://api.pinata.cloud/data/pinList?status=pinned&pageLimit=1000&includeCount=false`;
+  const fetch = require("node-fetch");
+  useEffect(()=>{
+    let star;
+    //yaha pr user ki kitni restriction hai woh call kro
+    //profile.jsx pr user details call kri hai similar function bnega
+    //bs user details.star value nikalni hai apne ko
+
+  })
+
+  const fetchPins = async () => {
     try {
-      const formData = new FormData()
-      formData.append("file", selectedFile)
-      const metadata = JSON.stringify({
-        name: "File name"
-      })
-      formData.append("pinataMetadata", metadata)
+      let pinHashes = [];
+      let pageOffset = 0;
+      let hasMore = true;
 
-      const options = JSON.stringify({
-        cidVersion: 0
-      })
-      formData.append("pinataOptions", options)
+      while (hasMore === true) {
+        try {
+          const response = await fetch(`${PIN_QUERY}&pageOffset=${pageOffset}`, {
+            method: 'GET',
+            headers: {
+              accept: 'application/json',
+              Authorization: PINATA_JWT
+            }
+          });
 
-      const res = await fetch(
-        "https://api.pinata.cloud/pinning/pinFileToIPFS",
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${process.env.REACT_APP_JWT}`
-          },
-          body: formData
+          const responseData = await response.json();
+          const rows = responseData.rows;
+
+          if (rows.length === 0) {
+            hasMore = false;
+          }
+
+          const itemsReturned = rows.length;
+          pinHashes.push(...rows.map(row => row.ipfs_pin_hash));
+          pageOffset += itemsReturned;
+        } catch (error) {
+          console.log(error);
+          break;
         }
-      )
-      const resData = await res.json()
-      setCid(resData.IpfsHash)
-      console.log(resData)
-      //await uploadToBlockchain(resData.IpfsHash);
+      }
+
+      console.log('Total pins fetched: ', pinHashes.length);
+      setPin(pinHashes);
+      setPinsFetched(true); // Set pinsFetched to true after fetching pins
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
-  // const uploadToBlockchain = async ipfsHash=>{
-  //     try {
-  //     const response = await fetch(
-  //       "YOUR_CONTRACT_ADDRESS", // Replace with your contract address
-  //       {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json"
-  //         },
-  //         body: JSON.stringify({
-  //           ipfsHash: ipfsHash
-  //         })
-  //       }
-  //     );
+  useEffect(() => {
+    console.log("render")
+    if (!pinsFetched) { // Check if pins have not been fetched yet
+      fetchPins();
+    }
+  }, [pinsFetched]); // Run only when pinsFetched changes
 
-  //     if (response.ok) {
-  //       console.log("IPFS hash uploaded to blockchain successfully");
-  //     } else {
-  //       console.log("Error uploading IPFS hash to blockchain");
-  //     }
-  //   } catch (error) {
-  //     console.log("Error uploading IPFS hash to blockchain:", error);
-  //   }
-  // };
-  //}
+  useEffect(() => {
+    console.log(pin)
+    if (pin.length >= 0) {
+      setLoading(false); // Set loading to false when pins are fetched
+    }
+  }, [pin]); // Run whenever pin value changes
 
   return (
     <>
-  <div className="upload-container">
-  <p>Please upload your file:</p>
-  <label className="form-label">
-    <input className="button" type="file" onChange={changeHandler} />
-  </label>
-  <button className="button" onClick={handleSubmission}>Submit</button>
-  {cid && (
-    <div className="file-container"> {/* Added wrapping div */}
-      <p>Uploaded File: {selectedFile.name}</p>
-      {selectedFile.type.startsWith("image/") ? (
-        <img
-          src={`${process.env.REACT_APP_GATEWAY_URL}/ipfs/${cid}`}
-          alt={`Uploaded image: ${selectedFile.name}`}
-        />
+      {star === 1 ? (
+        <Upload fetchPins={fetchPins} />
       ) : (
-        <a
-          href={`${process.env.REACT_APP_GATEWAY_URL}/ipfs/${cid}`}
-          download={selectedFile.name}
-        >
-          Download File: {selectedFile.name}
-        </a>
+        <div>You don't have access to upload files</div>
       )}
-    </div>
-  )}
-</div>
-
-</>
+      <div className="file-container">
+        <h1>Files List</h1>
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          pin.map((value, index) => (
+            <ul key={index}>
+              <a href={`${process.env.REACT_APP_URL}/ipfs/${value}`} target="_blank" rel="noopener noreferrer">
+                {value}
+              </a>
+            </ul>
+          ))
+        )}
+      </div>
+    </>
   );
 }
 
-export default View
+export default View;
+  

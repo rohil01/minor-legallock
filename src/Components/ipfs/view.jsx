@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from "react"
+import '../ipfs/view.css'
 
 function View() {
   const [selectedFile, setSelectedFile] = useState()
@@ -42,28 +43,33 @@ function View() {
 
   return (
     <>
-      <label className="form-label">Choose File</label>
-      <input type="file" onChange={changeHandler} />
-      <button onClick={handleSubmission}>Submit</button>
-      {cid && (
-        <div>
-          <p>Uploaded File: {selectedFile.name}</p>
-          {selectedFile.type.startsWith("image/") ? (
-            <img
-              src={`${process.env.REACT_APP_GATEWAY_URL}/ipfs/${cid}`}
-              alt={`Uploaded image: ${selectedFile.name}`}
-            />
-          ) : (
-            <a
-              href={`${process.env.REACT_APP_GATEWAY_URL}/ipfs/${cid}`}
-              download={selectedFile.name}
-            >
-              Download File: {selectedFile.name}
-            </a>
-          )}
-        </div>
+  <div className="upload-container">
+  <p>Please upload your file:</p>
+  <label className="form-label">
+    <input className="button" type="file" onChange={changeHandler} />
+  </label>
+  <button className="button" onClick={handleSubmission}>Submit</button>
+  {cid && (
+    <div className="file-container"> {/* Added wrapping div */}
+      <p>Uploaded File: {selectedFile.name}</p>
+      {selectedFile.type.startsWith("image/") ? (
+        <img
+          src={`${process.env.REACT_APP_GATEWAY_URL}/ipfs/${cid}`}
+          alt={`Uploaded image: ${selectedFile.name}`}
+        />
+      ) : (
+        <a
+          href={`${process.env.REACT_APP_GATEWAY_URL}/ipfs/${cid}`}
+          download={selectedFile.name}
+        >
+          Download File: {selectedFile.name}
+        </a>
       )}
-    </>
+    </div>
+  )}
+</div>
+
+</>
   );
 }
 

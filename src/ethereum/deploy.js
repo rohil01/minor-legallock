@@ -1,6 +1,7 @@
 const HDWalletProvider = require("@truffle/hdwallet-provider");
 const {Web3} = require("web3");
 const minor = require("./build/Minor.json");
+const file = require("./build/File.json");
  
 const provider = new HDWalletProvider(
   'search shuffle inner gadget trend pluck man poverty pen frequent permit phone',
@@ -18,7 +19,12 @@ const deploy = async () => {
     .deploy({ data: minor.evm.bytecode.object })
     .send({ gas: "1000000", from: accounts[0] });
  
-  console.log("Contract deployed to", result.options.address);
+  console.log("Minor Contract deployed to", result.options.address);
+  const result2 = await new web3.eth.Contract(file.abi)
+    .deploy({data:file.evm.bytecode.object})
+    .send({gas:"1000000", from:accounts[0]});
+
+  console.log("File contract deployed to ", result2.options.address);
   provider.engine.stop();
 };
 

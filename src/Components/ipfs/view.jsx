@@ -36,10 +36,37 @@ function View() {
       const resData = await res.json()
       setCid(resData.IpfsHash)
       console.log(resData)
+      //await uploadToBlockchain(resData.IpfsHash);
     } catch (error) {
       console.log(error)
     }
   }
+
+  // const uploadToBlockchain = async ipfsHash=>{
+  //     try {
+  //     const response = await fetch(
+  //       "YOUR_CONTRACT_ADDRESS", // Replace with your contract address
+  //       {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json"
+  //         },
+  //         body: JSON.stringify({
+  //           ipfsHash: ipfsHash
+  //         })
+  //       }
+  //     );
+
+  //     if (response.ok) {
+  //       console.log("IPFS hash uploaded to blockchain successfully");
+  //     } else {
+  //       console.log("Error uploading IPFS hash to blockchain");
+  //     }
+  //   } catch (error) {
+  //     console.log("Error uploading IPFS hash to blockchain:", error);
+  //   }
+  // };
+  //}
 
   return (
     <>

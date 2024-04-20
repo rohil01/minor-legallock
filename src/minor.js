@@ -4,7 +4,7 @@ import minor from './ethereum/build/Minor.json'
 
 const instance = new web3.eth.Contract(
   minor.abi,
-  "0xc21a8c6F3926BE5b5856DD4db368a3D7CC54F022"
+  "0xFE7C58f4F5C932BAbEE06B78b5356e67c22c33D6"
 );
  
 export default instance;

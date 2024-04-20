@@ -7,6 +7,7 @@ import FileListScreen from './screens/FileListScreen';
 import UploadFileScreen from './screens/UploadFileScreen';
 import Profile from './Components/Profilepage/Profile';
 import Home from './Components/Home/Home';
+import View from './Components/ipfs/view';
 import UploadFile from './screens/uploadFile';
 import ViewFile from './screens/viewFile';
 import DeleteFile from './screens/deleteFile';
@@ -23,6 +24,7 @@ const App = () => {
         <Route path="/" element={<LoginScreen />} />
         <Route path="/signup" element={<SignupForm />} />
         <Route path="/dashboard" element={<DashboardScreen />} />
+        <Route path="/viewfile" element={<ViewFile />} /> 
         <Route path="/filelist" element={<FileListScreen />} />
         <Route path="/uploadfile" element={<UploadFileScreen />} />
         <Route path="/profile/:id" element={<Profile />} />

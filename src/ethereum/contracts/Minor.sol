@@ -49,21 +49,25 @@ contract Minor {
 
 contract File{
     struct fileDetails{
-        string addr;
-        uint dateTime;
-        address addrUpload;
-        bool exist;
+        string ipfsHash;
+        uint uploadTime;
+        address uploader;
+        bool exists;
     }
     mapping(string => fileDetails)fileMap;
     
-    function upload(string memory url) public view returns(fileDetails memory){
-        fileDetails memory file; 
-        file.addr= url;
-        file.dateTime= block.timestamp;
-        file.addrUpload= msg.sender;
-        file.exist= true;
-        return file;
-    }    
+    //event FileUploaded(string addr, uint dateTime, address indexed )
 
+    function upload(string memory _ipfsHash) public {//view returns(fileDetails memory){
+        
+        require(bytes(_ipfsHash).length > 0, "IPFS hash cannot be empty");
+          
+        fileMap[_ipfsHash] = fileDetails({
+            ipfsHash: _ipfsHash,
+            uploadTime: block.timestamp,
+            uploader: msg.sender,
+            exists: true        
+        });
+    }
 }
 

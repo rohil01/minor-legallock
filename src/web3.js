@@ -16,7 +16,7 @@ let web3;
         const provider = new Web3.providers.HttpProvider('https://sepolia.infura.io/v3/0fccb03fc04448f0a6cf2e8ee8d9c990'); // You can change this to your desired Ethereum node URL
         web3 = new Web3(provider);
     }
-
+    
  
 
 export default web3;

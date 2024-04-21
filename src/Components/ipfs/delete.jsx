@@ -1,3 +1,5 @@
+import '../ipfs/view.css'
+
 function Delete(props) {
     const PINATA_JWT = `Bearer ${process.env.REACT_APP_JWT}`
     const PIN_QUERY = `https://api.pinata.cloud/data/pinList?status=pinned&pageLimit=1000&includeCount=false`
@@ -42,7 +44,7 @@ function Delete(props) {
       
     }
     return(
-      <button onClick={deletePins}>
+      <button className="button" onClick={deletePins}>
         Delete
       </button>
     )

@@ -1,12 +1,92 @@
 .upload-container {
-    margin-bottom: 20px; /* Add space below the entire div */
+    margin-bottom: 20px; 
   }
   
   .form-label {
-    margin-right: 10px; /* Add space between the input and label */
+    margin-right: 10px;
   }
   
   .button {
-    margin-top: 10px; /* Add space above the button */
+    margin-top: 10px;
   }
   
+  .upload-container, .file-container {
+    display: inline-block; 
+  }
+  
+  .file-container {
+    margin-left: 20px; 
+  }
+  
+
+  .upload-container, .file-container {
+    border: 1px solid #000000; 
+    padding: 10px; 
+  }
+  
+  .upload-container h3, .file-container h3 {
+    font-size: 16px; 
+    margin-bottom: 5px;
+  }
+  
+  .file-container li {
+    font-size: 14px;
+    margin-bottom: 5px; 
+  }
+  
+  h2 {
+    color:aliceblue;
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  
+ 
+/* .main-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr; 
+  grid-gap: 10px;
+} */
+
+.upload-container,
+.file-container {
+  display: flex;
+  flex-direction: column;
+  padding: 15px 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: rgba(92, 74, 74, 0.614);
+  margin: 10px;
+}
+
+.main-container > .upload-container {
+  flex: 2;
+}
+
+
+.upload-container h3,
+.file-container h3 {
+  margin: 0 0 5px 0;
+  font-size: 18px;
+  color: #211e1e;
+}
+
+.upload-container li,
+.file-container li {
+  font-size: 15px;
+  color: #666;
+  margin-bottom: 3px;
+}
+
+.upload-container button {
+  background-color: #7e352e;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.upload-container button:hover {
+  background-color:#303132;
+}

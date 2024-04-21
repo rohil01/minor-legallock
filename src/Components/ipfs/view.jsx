@@ -83,7 +83,7 @@ function View() {
         <div>You don't have access to upload files</div>
       )}
       <div className="file-container">
-        <h1>Files List</h1>
+        <h2>Files List:</h2>
         {
           pin.map((value, index) => (
             <ul key={index}>

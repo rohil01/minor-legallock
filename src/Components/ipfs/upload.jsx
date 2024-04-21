@@ -70,7 +70,7 @@ function View(props) {
   return (
     <>
   <div className="upload-container">
-  <p>Please upload your file:</p>
+  <h2>Please upload your file:</h2>
   <label className="form-label">
     <input className="button" type="file" onChange={changeHandler} />
   </label>

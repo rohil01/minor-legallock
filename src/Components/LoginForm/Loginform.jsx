@@ -52,10 +52,6 @@ class Loginform extends Component{
       }
       },1000);
     // console.log(index);
-    
-    
-    
-    
   };
 
       

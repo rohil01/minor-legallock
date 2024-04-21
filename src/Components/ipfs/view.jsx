@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../ipfs/view.css';
 import Upload from './upload';
+import Delete from './delete';
 
 function View() {
   const [pin, setPin] = useState([]);
@@ -20,6 +21,7 @@ function View() {
   })
 
   const fetchPins = async () => {
+    console.log("code running");
     try {
       let pinHashes = [];
       let pageOffset = 0;
@@ -88,6 +90,7 @@ function View() {
               <a href={`${process.env.REACT_APP_URL}/ipfs/${value}`} target="_blank" rel="noopener noreferrer">
                 {value}
               </a>
+              <Delete value={value} fetchPins={fetchPins}/>
             </ul>
           ))
         }

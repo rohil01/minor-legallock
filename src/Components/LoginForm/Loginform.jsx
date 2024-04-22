@@ -19,7 +19,7 @@ class Loginform extends Component{
       this.setState({manager: admin});
       console.log("Admins Address is: ", admin);
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-      const add = accounts[0]; // Assuming user has at least one address
+      const add = accounts[0]; // Assuming user has at least one address  
       this.setState({ userAddress: add }); // Use await to ensure state update
       let index= await minor.methods.id(accounts[0]).call();
       this.setState({id:parseInt(index) - 1});

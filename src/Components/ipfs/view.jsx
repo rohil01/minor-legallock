@@ -5,12 +5,10 @@ import { useParams } from 'react-router-dom';
 import Upload from './upload';
 import Delete from './delete';
 
-
-
 function View() {
   const [pin, setPin] = useState([]);
   const { id } = useParams();
-  const [star, setStar] = useState(2);
+  const [star, setStar] = useState();
   const [pinsFetched, setPinsFetched] = useState(false); // State to track if pins have been fetched
   const [loading, setLoading] = useState(true); // State to track loading state
 
@@ -19,18 +17,22 @@ function View() {
   const fetch = require("node-fetch");
   useEffect(()=>{
     let star;
-  //   const fetchStar = async () =>{
-  //     try{
-  //       console.log("fuc",id);
-  //       const userStarValue = await minor.methods.member(id-1).call();
-  //       setStar(userStarValue);
-  //       console.log(userStarValue);
-  //     }catch (error) {
-  //       console.error('Error fetching user star value:', error);
-  //   }      
-  // };
-  // fetchStar();
-},[]);    
+     const fetchStar = async () =>{
+       try{
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+         const add = accounts[0]; // Assuming user has at least one address   
+         //console.log(add);     
+        let id= await minor.methods.id(accounts[0]).call(); 
+        id = parseInt(id);        
+        const userStarValue = await minor.methods.members(id-1).call();
+         setStar(parseInt(userStarValue.star));
+         console.log(star);
+      }catch (error) {
+        console.error('Error fetching user star value:', error);
+    }      
+   };
+  fetchStar();
+ },[id]);    
     //yaha pr user ki kitni restriction hai woh call kro
     //profile.jsx pr user details call kri hai similar function bnega
     //bs user details.star value nikalni hai apne ko

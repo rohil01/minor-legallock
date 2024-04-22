@@ -9,6 +9,7 @@ const Profile = () => {
   const { id } = useParams();
 
   useEffect(() => {
+    console.log(id);
     const fetchUser = async () => {
       try {       
         const userDetails = await minor.methods.members(id-1).call();

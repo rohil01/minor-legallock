@@ -10,7 +10,7 @@ import Delete from './delete';
 function View() {
   const [pin, setPin] = useState([]);
   const { id } = useParams();
-  const [star, setStar] = useState(1);
+  const [star, setStar] = useState(2);
   const [pinsFetched, setPinsFetched] = useState(false); // State to track if pins have been fetched
   const [loading, setLoading] = useState(true); // State to track loading state
 
@@ -19,17 +19,18 @@ function View() {
   const fetch = require("node-fetch");
   useEffect(()=>{
     let star;
-    const fetchStar = async () =>{
-      try{
-        const userStarValue = await minor.methods.member(id-1).call().star;
-        setStar(userStarValue);
-        console.log(userStarValue);
-      }catch (error) {
-        console.error('Error fetching user star value:', error);
-    }      
-  };
-  fetchStar();
-},[id]);    
+  //   const fetchStar = async () =>{
+  //     try{
+  //       console.log("fuc",id);
+  //       const userStarValue = await minor.methods.member(id-1).call();
+  //       setStar(userStarValue);
+  //       console.log(userStarValue);
+  //     }catch (error) {
+  //       console.error('Error fetching user star value:', error);
+  //   }      
+  // };
+  // fetchStar();
+},[]);    
     //yaha pr user ki kitni restriction hai woh call kro
     //profile.jsx pr user details call kri hai similar function bnega
     //bs user details.star value nikalni hai apne ko
@@ -92,7 +93,7 @@ function View() {
 
   return (
     <>
-      {star === 1 ? (
+      {star === 0 ? (
         <Upload fetchPins={fetchPins} />
       ) : (
         <div>You don't have access to upload files</div>
@@ -105,7 +106,12 @@ function View() {
               <a href={`${process.env.REACT_APP_URL}/ipfs/${value}`} target="_blank" rel="noopener noreferrer">
                 {value}
               </a>
-              <Delete value={value} fetchPins={fetchPins}/>
+              {star===0?(
+                <Delete value={value} fetchPins={fetchPins}/>
+              ):
+              (<></>)
+              }
+              
             </ul>
           ))
         }

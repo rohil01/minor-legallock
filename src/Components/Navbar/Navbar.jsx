@@ -40,10 +40,10 @@ const Navbar = () => {
         <li onClick={handleProfileClick}>Profile</li>
       </ul>
 
-      <div className="search-box">
+      {/* <div className="search-box">
         <input type="text" placeholder="Search" />
         <img src={isDarkMode ? search_icon_dark : search_icon_light} alt="" />
-      </div>
+      </div> */}
 
       <img src={isDarkMode ? toggle_light : toggle_dark} style={{ width: '50px', height: 'auto' }} alt="" className="toggle-icon" onClick={toggleTheme} />
     </div>

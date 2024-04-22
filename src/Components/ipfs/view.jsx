@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import '../ipfs/view.css';
+import minor from '../../minor';
+import { useParams } from 'react-router-dom';
 import Upload from './upload';
 import Delete from './delete';
 
+
+
 function View() {
   const [pin, setPin] = useState([]);
+  const { id } = useParams();
   const [star, setStar] = useState(1);
   const [pinsFetched, setPinsFetched] = useState(false); // State to track if pins have been fetched
   const [loading, setLoading] = useState(true); // State to track loading state
@@ -14,12 +19,22 @@ function View() {
   const fetch = require("node-fetch");
   useEffect(()=>{
     let star;
+    const fetchStar = async () =>{
+      try{
+        const userStarValue = await minor.methods.member(id-1).call().star;
+        setStar(userStarValue);
+        console.log(userStarValue);
+      }catch (error) {
+        console.error('Error fetching user star value:', error);
+    }      
+  };
+  fetchStar();
+},[id]);    
     //yaha pr user ki kitni restriction hai woh call kro
     //profile.jsx pr user details call kri hai similar function bnega
     //bs user details.star value nikalni hai apne ko
 
-  })
-
+  
   const fetchPins = async () => {
     console.log("code running");
     try {

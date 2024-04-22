@@ -6,31 +6,10 @@ import '../ipfs/view.css'
 function View(props) {
   const [selectedFile, setSelectedFile] = useState()
   const [cid, setCid] = useState()
-//   const uploadToBlockchain = async ipfsHash=>{
-//     try {
-//     const response = await fetch(
-//       "YOUR_CONTRACT_ADDRESS", // Replace with your contract address
-//       {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json"
-//         },
-//         body: JSON.stringify({
-//           ipfsHash: ipfsHash
-//         })
-//       }
-//     );
+// this 
 
-//     if (response.ok) {
-//       console.log("IPFS hash uploaded to blockchain successfully");
-//     } else {
-//       console.log("Error uploading IPFS hash to blockchain");
-//     }
-//   } catch (error) {
-//     console.log("Error uploading IPFS hash to blockchain:", error);
-//     }
-//   };
-//   }
+}
+
   const changeHandler = event => {
     setSelectedFile(event.target.files[0])
   }
@@ -62,11 +41,24 @@ function View(props) {
         setCid(resData.IpfsHash)
         console.log(resData)
         props.fetchPins();
-        //await uploadToBlockchain(resData.IpfsHash);
+        await uploadHash(ipfsHash);
       } catch (error) {
         console.log(error)
     }
-  }
+  };
+  const uploadHash = async ipfsHash => {
+    try {
+      // Call the upload function of the File contract
+      await props.fileContract.methods.upload(ipfsHash).send({
+        from: '/* Your Ethereum account address */',
+        
+      });
+      console.log('Hashcode uploaded successfully.');
+    } catch (error) {
+      console.error('Error uploading hashcode:', error);
+    }
+  };
+ 
   return (
     <>
   <div className="upload-container">

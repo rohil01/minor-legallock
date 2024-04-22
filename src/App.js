@@ -25,6 +25,7 @@ const App = () => {
         <Route path="/signup" element={<SignupForm />} />
         <Route path="/dashboard" element={<DashboardScreen />} />
         <Route path="/viewfile" element={<ViewFile />} /> 
+        <Route path="/view" element={<View />} /> 
         <Route path="/filelist" element={<FileListScreen />} />
         <Route path="/uploadfile" element={<UploadFileScreen />} />
         <Route path="/profile/:id" element={<Profile />} />

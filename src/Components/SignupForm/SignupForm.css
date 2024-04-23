@@ -1,0 +1,9 @@
+.input-box input::placeholder {
+    color: white;
+  }
+  
+.input-box input {
+    border: 1px solid white;
+    color: white;
+  }
+  

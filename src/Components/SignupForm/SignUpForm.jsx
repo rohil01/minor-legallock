@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-//import { withRouteru} from 'react-router-dom';
 import './SignupForm.css'; 
 import { Link } from 'react-router-dom';
 
@@ -20,11 +19,28 @@ class SignupForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    // Validate form fields
-    if (!this.state.name || !this.state.adhaar || !this.state.age || !this.state.star) {
-      alert('Please fill in all the fields');
+    const { name, adhaar, age, star } = this.state;
+
+    if (!name.trim()) {
+      alert('Name should not be empty');
       return;
     }
+
+    if (!/^\d{12}$/.test(adhaar)) {
+      alert('Adhaar should be a 12-digit number');
+      return;
+    }
+
+    if (parseInt(age, 10) < 18) {
+      alert('Age should be 18 or above');
+      return;
+    }
+
+    if (parseInt(star, 10) < 1 || parseInt(star, 10) > 3) {
+      alert('Star value should be between 1 and 3');
+      return;
+    }
+
     // json temporary to backend here
     //localStorage.setItem('signupData', JSON.stringify(this.state));
     console.log('Form submitted:', this.state);
@@ -34,7 +50,7 @@ class SignupForm extends Component {
 
   handleLoginClick = (e) => {
     e.preventDefault();
-    //this.props.history.push('/');
+      // this.props.history.push('/');
   };
 
   render() {
@@ -96,4 +112,4 @@ class SignupForm extends Component {
   }
 }
 
-export default (SignupForm);
+export default SignupForm;

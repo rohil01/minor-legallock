@@ -25,7 +25,7 @@ const Navbar = () => {
     const add = accounts[0]; // Assuming user has at least one address
     // console.log(add);
     
-    let index= await minor.methods.id(accounts[0]).call();
+    let index= await minor.methods.id(accounts[0]).call(); 
     
     window.location.href = `/Profile/${index}`;
     // console.log("hello")

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useState } from "react"
+import file from "../../file"
 import '../ipfs/view.css'
-
 
 function View(props) {
   const [selectedFile, setSelectedFile] = useState()
@@ -38,17 +38,20 @@ function View(props) {
           setCid(resData.IpfsHash)
           console.log(resData)
           props.fetchPins();
-          // await uploadHash(ipfsHash);
+          await uploadHash(resData.IpfsHash);
         } catch (error) {
           console.log(error)
       }
     };
-    const uploadHash = async (ipfsHash) => {
+    const uploadHash = async (x) => {
       try {
+        
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
         // Call the upload function of the File contract
-        await props.fileContract.methods.upload(ipfsHash).send({
-          from: '/* Your Ethereum account address */',
-          
+        console.log("f", x);
+        await file.methods.upload(x).send({
+          from: accounts[0],
+          gas: '1000000'
         });
         console.log('Hashcode uploaded successfully.');
       } catch (error) {

@@ -48,6 +48,7 @@ class SignupForm extends Component {
     //this.props.history.push('/');
   };
 
+  
   handleLoginClick = (e) => {
     e.preventDefault();
       // this.props.history.push('/');

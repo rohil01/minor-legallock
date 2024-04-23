@@ -58,6 +58,7 @@ class Loginform extends Component{
       
   render(){  
       return (
+    <body className='login-body'> 
       <div className='wrapper'>
         
           <form onSubmit={this.onSubmit}>
@@ -78,6 +79,7 @@ class Loginform extends Component{
               </div>
           </form>
       </div>
+      </body>
     );
   }  
 };

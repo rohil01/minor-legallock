@@ -1,9 +1,10 @@
 body{
-    background: url(../../Assets/login.jpg);
+    background-image: url("../../Assets/login.jpg");
     background-size: cover;
     background-position: center;
     align-items: center;
     justify-content: center;
+    margin: 0;
 }
 
 .wrapper {
@@ -17,8 +18,9 @@ body{
     color: #030202;
     border-radius: 10px;
     padding: 40px 40px;
-    margin-top: 100px; /* adjust for navbar height */
+    margin-top: 100px; 
   }
+  
   
 @media (max-width: 768px) {
     .wrapper {

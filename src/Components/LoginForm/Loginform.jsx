@@ -58,6 +58,7 @@ class Loginform extends Component{
       
   render(){  
       return (
+    <body className='login-body'> 
       <div className='wrapper'>
         
           <form onSubmit={this.onSubmit}>
@@ -67,8 +68,9 @@ class Loginform extends Component{
                   <img src ={logo} className='login-icon' alt='logo' />
               </div>
 
-              <Button primary loading={this.state.loading}type='submit'>{this.state.loading}
-                </Button>
+              <Button primary loading={this.state.loading}type='submit'> 
+                 {this.state.loading}
+              </Button>
 
               <div className='register-link'>
                   <p>Don't have a MetaMask account? 
@@ -78,7 +80,7 @@ class Loginform extends Component{
               </div>
           </form>
       </div>
-
+      </body>
     );
   }  
 };

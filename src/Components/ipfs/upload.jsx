@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useState } from "react"
-import file from "../../file"
+import file from "../../CaseFactory"
 import '../ipfs/view.css'
 
 function View(props) {
@@ -38,26 +38,26 @@ function View(props) {
           setCid(resData.IpfsHash)
           console.log(resData)
           props.fetchPins();
-          await uploadHash(resData.IpfsHash);
+          // await uploadHash(resData.IpfsHash);
         } catch (error) {
           console.log(error)
       }
     };
-    const uploadHash = async (x) => {
-      try {
+    // const uploadHash = async (x) => {
+    //   try {
         
-        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-        // Call the upload function of the File contract
-        console.log("f", x);
-        await file.methods.upload(x).send({
-          from: accounts[0],
-          gas: '1000000'
-        });
-        console.log('Hashcode uploaded successfully.');
-      } catch (error) {
-        console.error('Error uploading hashcode:', error);
-      }
-    };
+    //     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    //     // Call the upload function of the File contract
+    //     console.log("f", x);
+    //     await file.methods.upload(x).send({
+    //       from: accounts[0],
+    //       gas: '1000000'
+    //     });
+    //     console.log('Hashcode uploaded successfully.');
+    //   } catch (error) {
+    //     console.error('Error uploading hashcode:', error);
+    //   }
+    // };
     return (
       <>
     <div className="upload-container">

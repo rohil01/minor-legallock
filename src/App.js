@@ -11,6 +11,7 @@ import View from './Components/ipfs/view';
 import UploadFile from './screens/uploadFile';
 import ViewFile from './screens/viewFile';
 import DeleteFile from './screens/deleteFile';
+import UploadCase from './screens/uploadcase.jsx'
 
 
 const App = () => {
@@ -24,6 +25,7 @@ const App = () => {
         <Route path="/" element={<LoginScreen />} />
         <Route path="/signup" element={<SignupForm />} />
         <Route path="/dashboard" element={<DashboardScreen />} />
+        <Route path="/dashboard/new" element={<UploadCase />} />
         <Route path="/viewfile" element={<ViewFile />} /> 
         <Route path="/view" element={<View />} /> 
         <Route path="/filelist" element={<FileListScreen />} />

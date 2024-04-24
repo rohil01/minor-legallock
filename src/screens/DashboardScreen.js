@@ -1,47 +1,44 @@
-import React from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Button, Card } from 'semantic-ui-react';
+import CaseFactory from '../CaseFactory.js';
 import Navbar from '../Components/Navbar/Navbar';
 import './DashboardScreen.css';
-import CaseFactory from '../CaseFactory.js';
-
-import View from '../Components/ViewCases/view.jsx'
-
-class CaseIndex extends Components{
-  static async getInitialProps(){
-    const cases = await CaseFactory.methods.returnAddress().call();
-    return {cases}
-  }
-  renderCases(){
-    const items = this.props.CaseFactory.cases(address=>{
-      return{
-          header: address,
-          description: (
-              //<Link route={/campaigns/${address}}>
-                  <a>View Campaign</a>
-              //</Link>
-          ),
-          fluid: true
-      }
-  });
-  return <Card.Group items={items} />;
-  }
-}
-
+import minor from '../minor.js'
 const DashboardScreen = () => {
+  const [cases, setCases] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+      let id= await minor.methods.id(accounts[0]).call();
+
+      const userDetails = await minor.methods.members(parseInt(id)-1).call();
+
+      const addresses = await CaseFactory.methods.returnAddress(userDetails.add).call();
+      console.log(addresses);
+      setCases(addresses);
+    };
+
+    fetchData();
+  }, []);
+
+  const renderCases = () => {
+    return cases.map((address) => ({
+      header: address,
+      description: <a href={`/campaigns/${address}`}>View Case</a>,
+      fluid: true,
+    }));
+  };
+
+  const redirectToNewPage = () => {
+    window.location.href = '/dashboard/new';
+  };
+
   return (
     <div className="dashboardScreen">
       <Navbar />
-      <div className="container">
-        <h1>Welcome to Your E-Vault System</h1>
-        <div className="optionContainer">
-          {/* <Link to="/filelist" className="button"> */}
-            <View />
-          {/* </Link>
-          <Link to="/uploadfile" className="button"> */}
-          {/* </Link> */}
-          
-        </div>
-      </div>
+      <Button primary onClick={redirectToNewPage}>Create New Case</Button>
+      <Card.Group items={renderCases()} />
     </div>
   );
 };

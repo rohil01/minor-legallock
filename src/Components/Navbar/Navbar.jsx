@@ -28,16 +28,19 @@ const Navbar = () => {
     let index= await minor.methods.id(accounts[0]).call(); 
     
     window.location.href = `/Profile/${index}`;
-    // console.log("hello")
-    // alert("fuck off");
+    
   };
 
   return (
     <div className={`Navbar ${isDarkMode ? 'dark-mode' : ''}`}>
-      <img src={isDarkMode ? logo_dark : logo_light} style={{ width: '200px', height: 'auto' }} alt="LegalLock " className="logo" />
+      <img src={isDarkMode ? logo_light : logo_dark} style={{ width: '200px', height: 'auto' }} alt="LegalLock " className="logo" />
       <ul>
         <li><Link to="/Home">Home</Link></li>
         <li onClick={handleProfileClick}>Profile</li>
+        <li><Link to="/DashboardScreen">Dashboard</Link></li>
+        <li>
+          <a href="mailto:youremail@example.com">Contact Us</a>
+        </li>
       </ul>
 
       {/* <div className="search-box">

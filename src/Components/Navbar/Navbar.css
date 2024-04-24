@@ -8,30 +8,57 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: #333;
+  background-color: rgb(0, 0, 0, 0.7);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .Navbar ul {
-  width: 200%;
+  width: auto;
   display: flex;
   list-style-type: none;
   margin: 0;
   padding: 0;
+  justify-content: center;
 }
 
 .Navbar li {
-  margin: 0 10px ;
+  margin: 0 30px ;
 }
 
-.Navbar a {
-  text-decoration: none;
-  color: #987070;
+.Navbar a{
+  text-decoration: none; 
+}
+
+.Navbar li {
+  text-decoration: none; 
+  color: #580707;
   font-size: 18px;
+  font-weight: bold; 
+  border: none; 
+  padding: 5px 20px; 
+  border-radius: 50px; 
+  background-color: #F0F9FF; 
+  cursor: pointer;
 }
 
-.Navbar a:hover {
-  color: #cda39c;
+.Navbar li a{
+  text-decoration: none; 
+  color: #580707;
+
+}
+
+.Navbar li:hover {
+  color: white;
+  background-color: #580707;
+}
+
+.Navbar li a:hover{
+  color: white;
+  background-color: #580707;
+}
+
+.Navbar a:visited {
+  color: inherit; 
 }
 
 .search-box {

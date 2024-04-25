@@ -5,7 +5,7 @@ const caseFactory = require("./build/CaseFactory.json");
  
 const provider = new HDWalletProvider(
   'search shuffle inner gadget trend pluck man poverty pen frequent permit phone',
-  'https://sepolia.infura.io/v3/016fd67743cb4ba3aa0de72794fbe4e0'
+  'https://sepolia.infura.io/v3/5c79954388824be4938738bdbce82f8c'
 );
 
 

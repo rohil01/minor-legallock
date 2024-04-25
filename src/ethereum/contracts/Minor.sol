@@ -48,19 +48,24 @@ contract Minor {
 }   
 contract CaseFactory{
     address [] addressArray ;      
-    mapping (address => address []) cases;          //lawyer address=>array of all case addresses
+    mapping (address => address []) cases; 
+    mapping (address => address []) clientcases;           //lawyer address=>array of all case addresses
     uint public caseCnt;
     
     function createCase( address clientAddress , uint dateOfFiling) public{
         caseCnt++;
         address newCase = address(new Case(caseCnt, msg.sender,  clientAddress,   dateOfFiling));
         cases[msg.sender].push(newCase);   
-        cases[clientAddress].push(newCase);     //new case is the address of the case contract 
+        clientcases[clientAddress].push(newCase);     //new case is the address of the case contract 
         
     }
-    function returnAddress(address addr) public view returns(address [] memory) {
+    function returnAddress1(address addr) public view returns(address [] memory) {
         return (cases[addr]);
     } 
+    function returnAddress2(address addr) public view returns(address [] memory) {
+        return (clientcases[addr]);
+    } 
+    
 }
 contract Case{
     uint caseid;

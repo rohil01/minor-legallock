@@ -14,7 +14,7 @@ const DashboardScreen = () => {
 
       const userDetails = await minor.methods.members(parseInt(id)-1).call();
 
-      const addresses = await CaseFactory.methods.returnAddress(userDetails.add).call();
+      const addresses = await CaseFactory.methods.returnAddress1(accounts[0]).call();
       console.log(addresses);
       setCases(addresses);
     };

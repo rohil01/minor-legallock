@@ -50,14 +50,14 @@ contract CaseFactory{
     address [] addressArray ;      
     mapping (address => address []) cases; 
     mapping (address => address []) clientcases;           //lawyer address=>array of all case addresses
-    uint public caseCnt;
+    uint public caseCnt=1;
     
     function createCase( address clientAddress , uint dateOfFiling) public{
-        caseCnt++;
+        
         address newCase = address(new Case(caseCnt, msg.sender,  clientAddress,   dateOfFiling));
         cases[msg.sender].push(newCase);   
         clientcases[clientAddress].push(newCase);     //new case is the address of the case contract 
-        
+        caseCnt++;
     }
     function returnAddress1(address addr) public view returns(address [] memory) {
         return (cases[addr]);
@@ -72,14 +72,21 @@ contract Case{
     uint dof;
     address lawyer;
     address client;
+    
+    struct details{
+        uint caseid;
+        uint dof;
+        address lawyer;
+        address client;
+    }
     constructor (uint caseID, address lawyerAddress, address clientAddress, uint dateOfFiling){
         lawyer = lawyerAddress;
         client = clientAddress;
         dof = dateOfFiling;
-        caseID = caseid;
-        
+        caseid = caseID;
     }
-     struct fileDetails{
+    
+    struct fileDetails{
         address addr;
         uint dateTime;
         address addrUpload;
@@ -90,6 +97,14 @@ contract Case{
     address [] IPFSAdd;
     function insertAddr(address add) public{
         IPFSAdd.push(add);
+    }
+    function returnDetails()public view returns(details memory) {
+        details memory caseDetails;
+        caseDetails.lawyer = lawyer;
+        caseDetails.client = client;
+        caseDetails.dof = dof;
+        caseDetails.caseid = caseid;
+        return caseDetails;
     }
     //function to upload files in array
     function fetchAddr() public view returns(address[] memory){

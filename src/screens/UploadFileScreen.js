@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './UploadFileScreen.css';
+// import './UploadFileScreen.css';
 import '../Components/Navbar/Navbar';
 import Navbar from '../Components/Navbar/Navbar';
 

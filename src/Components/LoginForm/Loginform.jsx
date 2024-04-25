@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import './Loginform.css';
+// import './Loginform.css';
 import logo from '../../Assets/metamask.svg'
 import { MdAccountCircle } from "react-icons/md";
 import minor from '../../minor'
@@ -58,17 +58,17 @@ class Loginform extends Component{
       
   render(){  
       return (
-    <body className='login-body'> 
-      <div className='wrapper'>
+    <body className="login-body"> 
+      <div className='login--wrapper'>
         
-          <form onSubmit={this.onSubmit}>
+          <form className='login--form' onSubmit={this.onSubmit}>
               <h1>{this.props.admin}</h1>
               <h1>Welcome to LegalLock</h1>
               <div className='logo-header'>
                   <img src ={logo} className='login-icon' alt='logo' />
               </div>
 
-              <Button primary loading={this.state.loading}type='submit'> 
+              <Button className="loginformbutton" primary loading={this.state.loading}type='submit'> 
                  {this.state.loading}
               </Button>
 

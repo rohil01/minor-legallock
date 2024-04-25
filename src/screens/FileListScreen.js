@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './FileListScreen.css';
+// import './FileListScreen.css';
 import Navbar from '../Components/Navbar/Navbar';
 
 const FileListScreen = () => {

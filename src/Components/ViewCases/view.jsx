@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react';
+import {Input , Button} from 'semantic-ui-react'
 import { useState } from "react"
 import CaseFactory from "../../CaseFactory"
 import minor from '../../minor';
+import './view.css'
 function View(props) {
+    const [loading,setLoading] =useState('')
     const [formData, setFormData] = useState({
         date: '',
         address: ''
@@ -16,6 +19,7 @@ function View(props) {
       };
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true)
         const dateObject = new Date(formData.date);
         const timestamp = dateObject.getTime();
         try {  
@@ -27,17 +31,19 @@ function View(props) {
             await CaseFactory.methods.createCase(userDetails.add,timestamp).send({
                 from:accounts[0]
             })
+            window.location.href = '/dashboard';
         } catch (error) {
             console.log(error)
         }
     };
     return (
         <>
-        <form onSubmit={handleSubmit}>
-          <h1>Signup for LegalLock</h1>
+        <form className='viewcases' onSubmit={handleSubmit}>
+          <h1>Enter Your Case Basic Details: </h1>
 
-          <div className='input-box'>
-            <input
+          <div className='viewcases--inputbox1'>
+            <h3>Enter Date of filing of the case: </h3>
+            <Input
               type='datetime-local'
               placeholder='Date Of Filing'
               name='date'
@@ -45,9 +51,10 @@ function View(props) {
               onChange={handleChange}
             />
           </div>
-
-          <div className='input-box'>
-            <input
+          <h3>Enter Your Client's Address: </h3>
+          
+          <div className='viewcases--inputbox2'>
+            <Input
               type='input'
               placeholder='Client Address'
               name='address'
@@ -55,7 +62,7 @@ function View(props) {
               onChange={handleChange}
             />
           </div>
-          <button type='submit'>Submit</button>
+          <Button className='viewcases--button' loading={loading} type='submit'>Submit</Button>
         </form>
         </>
 );

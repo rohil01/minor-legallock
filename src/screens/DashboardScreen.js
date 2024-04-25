@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button, Card } from 'semantic-ui-react';
 import CaseFactory from '../CaseFactory.js';
 import Navbar from '../Components/Navbar/Navbar';
-import './DashboardScreen.css';
+// import './DashboardScreen.css';
 import Case from '../case.js'
 import minor from '../minor.js'
 
@@ -31,7 +31,6 @@ class DashboardScreen extends React.Component {
     fetchData();
   }
 
-
   componentDidUpdate(prevProps, prevState) {
     if (prevState.cases !== this.state.cases) { //checks change
       const fetchDetails = async () => {
@@ -57,7 +56,7 @@ class DashboardScreen extends React.Component {
     //detail.date timestamp
     //yahan daalna hai description vagera
     return this.state.details.map((detail, index) => (
-      <Card key={index} href={`/uploadnew/${detail.caseid}`}>
+      <Card key={index} href={`/dashboard/cases/${this.state.cases[index]}`}>
         <Card.Content header={"Case ID: " + `${detail.caseid}`} description={"Desc Of " + `${detail.caseid}`} />
       </Card>
     ));
@@ -71,7 +70,7 @@ class DashboardScreen extends React.Component {
     return (
       <div className="dashboardScreen">
         <Navbar />
-        <Button primary onClick={this.redirectToNewPage}>Create New Case</Button>
+        <Button primary color='#1A4D2E' onClick={this.redirectToNewPage}>Create New Case</Button>
         <Card.Group>{this.renderCases()}</Card.Group>
       </div>
     );

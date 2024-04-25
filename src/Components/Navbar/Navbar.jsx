@@ -35,7 +35,7 @@ const Navbar = () => {
     <div className={`Navbar ${isDarkMode ? 'dark-mode' : ''}`}>
       <img src={isDarkMode ? logo_light : logo_dark} style={{ width: '200px', height: 'auto' }} alt="LegalLock " className="logo" />
       <ul>
-        <li><Link to="/Home">Home</Link></li>
+        <li><Link to="/dashboard">Home</Link></li>
         <li onClick={handleProfileClick}>Profile</li>
         <li><Link to="/DashboardScreen">Dashboard</Link></li>
         <li>
@@ -48,7 +48,7 @@ const Navbar = () => {
         <img src={isDarkMode ? search_icon_dark : search_icon_light} alt="" />
       </div> */}
 
-      <img src={isDarkMode ? toggle_light : toggle_dark} style={{ width: '50px', height: 'auto' }} alt="" className="toggle-icon" onClick={toggleTheme} />
+      {/* <img src={isDarkMode ? toggle_light : toggle_dark} style={{ width: '50px', height: 'auto' }} alt="" className="toggle-icon" onClick={toggleTheme} /> */}
     </div>
   )
 }

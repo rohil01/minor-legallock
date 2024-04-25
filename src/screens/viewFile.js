@@ -6,7 +6,7 @@ const viewFile = () => {
  
   return (
     <div> 
-    <View />
+      <View />
     </div>
   );
 };

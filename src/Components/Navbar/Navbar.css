@@ -6,7 +6,7 @@
   z-index: 1000;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  
   padding: 10px 20px;
   background-color: rgb(0, 0, 0, 0.7);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -16,13 +16,14 @@
   width: auto;
   display: flex;
   list-style-type: none;
+  
   margin: 0;
-  padding: 0;
+  padding-right: 46vw;
   justify-content: center;
 }
 
 .Navbar li {
-  margin: 0 30px ;
+  margin: 0 10px ;
 }
 
 .Navbar a{
@@ -31,30 +32,30 @@
 
 .Navbar li {
   text-decoration: none; 
-  color: #580707;
+  color: #E8DFCA;
   font-size: 18px;
   font-weight: bold; 
   border: none; 
-  padding: 5px 20px; 
-  border-radius: 50px; 
-  background-color: #F0F9FF; 
+  padding: 14px 20px; 
+  border-radius: 10px; 
+  /* background-color: #F0F9FF;  */
   cursor: pointer;
 }
 
 .Navbar li a{
   text-decoration: none; 
-  color: #580707;
+  color: #E8DFCA;
 
 }
 
 .Navbar li:hover {
   color: white;
-  background-color: #580707;
+  background-color: #4F6F52;
 }
 
 .Navbar li a:hover{
   color: white;
-  background-color: #580707;
+  background-color: #4F6F52;
 }
 
 .Navbar a:visited {

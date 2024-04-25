@@ -85,20 +85,7 @@ contract Case{
         dof = dateOfFiling;
         caseid = caseID;
     }
-    
-    struct fileDetails{
-        address addr;
-        uint dateTime;
-        address addrUpload;
-        bool exist;
-    }
-    mapping(address => fileDetails)fileMap;//string ke jgh cid aayega yaani ki address
-    //array of address;
-    address [] IPFSAdd;
-    function insertAddr(address add) public{
-        IPFSAdd.push(add);
-    }
-    function returnDetails()public view returns(details memory) {
+     function returnDetails()public view returns(details memory) {
         details memory caseDetails;
         caseDetails.lawyer = lawyer;
         caseDetails.client = client;
@@ -106,15 +93,29 @@ contract Case{
         caseDetails.caseid = caseid;
         return caseDetails;
     }
+    
+    struct fileDetails{
+        address addr;
+        uint dateTime;
+        address addrUpload;
+        bool exist;
+    }
+    mapping(address => fileDetails)fileMap;
+    //array of address;
+    address [] public IPFSAdd;
+     
     //function to upload files in array
     function fetchAddr() public view returns(address[] memory){
         return IPFSAdd;
     }
-    function upload(address addr) public view{
+    function upload(address addr) public returns(fileDetails memory){
+        IPFSAdd.push(addr);
         fileDetails memory file; 
         file.addr= addr;
         file.dateTime= block.timestamp;
         file.addrUpload= msg.sender;
         file.exist=true;
+        return file;
     }
+    
 }

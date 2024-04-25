@@ -12,6 +12,7 @@ import UploadFile from './screens/uploadFile';
 import ViewFile from './screens/viewFile';
 import DeleteFile from './screens/deleteFile';
 import UploadCase from './screens/uploadcase.jsx'
+import UploadNew from './screens/UploadNew.js' //here
 
 
 const App = () => {
@@ -28,10 +29,11 @@ const App = () => {
         <Route path="/dashboard/new" element={<UploadCase />} />
         <Route path="/viewfile" element={<ViewFile />} /> 
         <Route path="/view" element={<View />} /> 
-        <Route path="/filelist" element={<FileListScreen />} />
-        <Route path="/uploadfile" element={<UploadFileScreen />} />
+        {/* <Route path="/filelist" element={<FileListScreen />} />
+        <Route path="/uploadfile" element={<UploadFileScreen />} /> */}
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/Home" element={<Home />} />
+
       </Routes>
     </Router>
     </div>

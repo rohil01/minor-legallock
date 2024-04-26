@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button, Card } from 'semantic-ui-react';
 import CaseFactory from '../CaseFactory.js';
 import Navbar from '../Components/Navbar/Navbar';
-// import './DashboardScreen.css';
+import './DashboardScreen.css';
 import Case from '../case.js'
 import minor from '../minor.js'
 
@@ -40,6 +40,8 @@ class DashboardScreen extends React.Component {
             return await Cases.methods.returnDetails().call();
           });
           const resolvedDetails = await Promise.all(promises);
+
+          
           this.setState({ details: resolvedDetails });
         } catch (error) {
           console.error('Error fetching details:', error);
@@ -51,16 +53,28 @@ class DashboardScreen extends React.Component {
   }
 
   renderCases = () => {
-    //detail.lawyer address
-    //detail.client address
-    //detail.date timestamp
-    //yahan daalna hai description vagera
-    return this.state.details.map((detail, index) => (
-      <Card key={index} href={`/dashboard/cases/${this.state.cases[index]}`}>
-        <Card.Content header={"Case ID: " + `${detail.caseid}`} description={"Desc Of " + `${detail.caseid}`} />
-      </Card>
-    ));
-  };
+
+  return this.state.details.map((detail, index) => (
+    <Card key={index} href={`/dashboard/cases/${this.state.cases[index]}`}>
+      <Card.Content>
+        <Card.Header>Case ID: {detail.caseid}</Card.Header>
+        <Card.Description>
+          {"Description Of Case " + `${detail.caseid}`}
+        </Card.Description>
+        <Card.Description>
+          {"Lawyer Address: " + `${detail.lawyer}`}
+        </Card.Description>
+        <Card.Description>
+          {"Client Address: " + `${detail.client}`}
+        </Card.Description>
+        <Card.Description>
+          {"Timestamp: " + `${detail.dof}`}
+        </Card.Description>
+      </Card.Content>
+    </Card>
+  ));
+};
+
 
   redirectToNewPage = () => {
     window.location.href = '/dashboard/new';

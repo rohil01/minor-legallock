@@ -1,7 +1,8 @@
 .dashboardScreen {
     padding-top: 15vh;
     height: 100vh;
-    background-color: #E8DFCA;
+    background-color: #beb383;
+    background-image: '../../Assets/home.jpg';
     padding-left: 10px;
     padding-right: 10px;
   }
@@ -29,18 +30,63 @@
     margin-top: 20px;
   }
    */
-  .dashboardScreen Button {
+  /* .dashboardScreen Button {
     margin-bottom: 10px !important;
-  }
+  } */
 /*   
   .button:hover {
     background-color: #303132;
     color: #fff;
   } */
 
+.dashboardScreen {
+  /* background-image: url("https://wallpapers.com/rick-and-morty");  */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100vh; 
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: flex-start;
+}
+
+.ui.buttons{
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 2rem;
+}
+
+.ui.button.primary {
+  background-color: #7e352e !important; 
+  color: white !important; 
+  border-radius: 0.75rem !important; 
+}
+
+.ui.card {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 4px 10px rgba(0, 0, 0, 0.24); 
+  border-radius: 9% !important; 
+  width: 50rem;
+  max-width: 90%;
+  margin: 1cm;
+}
+
+.ui.card .description {
+  display: flex; 
+  flex-direction: column; 
+  white-space: wrap; 
+  overflow-wrap: break-word; 
+  word-break: break-word; 
+  max-height: 5rem; 
+}
+
+.ui.card:hover.hover{
+  background-color: #7e352e;
+  cursor: pointer;
+}
   @media (max-width: 768px) {
     .dashboardScreen {
-      padding-top: 60px; /* adjust for navbar height */
+      padding-top: 60px; 
     }
   }
 

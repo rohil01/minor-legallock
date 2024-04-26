@@ -1,6 +1,6 @@
 import React from "react";
-import "./Home.css";
-import Navbar from "../Navbar/Navbar.jsx"; // Assuming your navbar component is in a file named Navbar.js
+ import "./Home.css";
+import Navbar from "../Navbar/Navbar.jsx";
 
 const Home = () => {
   return (

@@ -1,16 +1,13 @@
-body {
+.home-container {
   background-image: url("../../Assets/home.jpg"); 
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   background-color: rgba(0, 0, 0, 0.8); 
-  height: 100vh;
+  height: auto;
   margin: 0;
 }
-/* .home-container{
-  background-image: url("../../Assets/home.jpg"); 
 
-} */
 .content-container {
   flex: 1; 
   color: white; 
@@ -77,8 +74,8 @@ body {
 }
 
 .lawyers-section {
-  /* Style the lawyers section here */
-  background-color: #f0f0f0; /* Optional background color */
+  
+  background-color: #f0f0f0; 
   padding: 50px; 
   text-align: center; 
 }

@@ -5,7 +5,7 @@ import Navbar from '../Components/Navbar/Navbar';
 import './DashboardScreen.css';
 import Case from '../case.js'
 import minor from '../minor.js'
-
+import '../index.css'
 class DashboardScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -57,7 +57,9 @@ class DashboardScreen extends React.Component {
   return this.state.details.map((detail, index) => (
     <Card key={index} href={`/dashboard/cases/${this.state.cases[index]}`}>
       <Card.Content>
-        <Card.Header>Case ID: {detail.caseid}</Card.Header>
+        <Card.Header>
+        {"Case Id: " + `${detail.caseid}`}
+        </Card.Header>
         <Card.Description>
           {"Description Of Case " + `${detail.caseid}`}
         </Card.Description>

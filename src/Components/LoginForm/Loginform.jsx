@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-// import './Loginform.css';
+import './Loginform.css';
 import logo from '../../Assets/metamask.svg'
 import { MdAccountCircle } from "react-icons/md";
 import minor from '../../minor'
@@ -9,7 +9,7 @@ class Loginform extends Component{
   
   state={
     manager:'',
-    loading:'Login',
+    loading:'',
     id:'',
     userAddress:''
   }
@@ -48,7 +48,7 @@ class Loginform extends Component{
         setTimeout(() => {
           window.location.href = '/dashboard'; 
           console.log("redirecting")
-        }, 2000);
+        }, 1000);
       }
       },1000);
     // console.log(index);
@@ -69,7 +69,7 @@ class Loginform extends Component{
               </div>
 
               <Button className="loginformbutton" primary loading={this.state.loading}type='submit'> 
-                 {this.state.loading}
+                 Log In
               </Button>
 
               <div className='register-link'>

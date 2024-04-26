@@ -7,7 +7,7 @@ const Caseview = () => {
     const { url } = useParams();
     return (
       <div> 
-        {/* <Navbar /> */}
+        <Navbar />
       
       </div>
     );

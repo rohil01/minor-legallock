@@ -95,20 +95,20 @@ contract Case{
     }
     
     struct fileDetails{
-        address addr;
+        string addr;
         uint dateTime;
         address addrUpload;
         bool exist;
     }
     mapping(address => fileDetails)fileMap;
     //array of address;
-    address [] public IPFSAdd;
+    string [] public IPFSAdd;
      
     //function to upload files in array
-    function fetchAddr() public view returns(address[] memory){
+    function fetchAddr() public view returns(string[] memory){
         return IPFSAdd;
     }
-    function upload(address addr) public returns(fileDetails memory){
+    function upload(string memory addr) public returns(fileDetails memory){
         IPFSAdd.push(addr);
         fileDetails memory file; 
         file.addr= addr;

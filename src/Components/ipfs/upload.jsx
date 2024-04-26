@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import { useState } from "react"
-import file from "../../CaseFactory"
 import '../ipfs/view.css'
+import { upload } from '@testing-library/user-event/dist/upload';
+import CaseContract from '../../case';
+import web3 from '../../web3';
 
 function View(props) {
   const [selectedFile, setSelectedFile] = useState()
@@ -37,27 +39,31 @@ function View(props) {
           const resData = await res.json()
           setCid(resData.IpfsHash)
           console.log(resData)
-          props.fetchPins();
-          // await uploadHash(resData.IpfsHash);
+          //props.fetchPins();
+           await uploadHash(resData.IpfsHash);
         } catch (error) {
           console.log(error)
       }
     };
-    // const uploadHash = async (x) => {
-    //   try {
+    const uploadHash = async (x) => {
+      try {        
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        // Call the upload function of the File contract
+        //console.log("f", props.url);
+    
+        const Case1 = CaseContract(props.url);
+        const result = web3.utils.sha3(x);
+        console.log(result);
+        await Case1.methods.upload(x).send({
+          from: accounts[0],
+          gas: '1000000'
+        });
+        console.log('Hashcode uploaded successfully.');
         
-    //     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-    //     // Call the upload function of the File contract
-    //     console.log("f", x);
-    //     await file.methods.upload(x).send({
-    //       from: accounts[0],
-    //       gas: '1000000'
-    //     });
-    //     console.log('Hashcode uploaded successfully.');
-    //   } catch (error) {
-    //     console.error('Error uploading hashcode:', error);
-    //   }
-    // };
+      } catch (error) {
+        console.error('Error uploading hashcode:', error);
+      }
+    };
     return (
       <>
     <div className="upload-container">
@@ -71,10 +77,5 @@ function View(props) {
     </>
 );
 }
-
-  
- 
-  
-
 
 export default View

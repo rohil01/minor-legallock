@@ -4,8 +4,10 @@ import minor from '../../minor';
 import { useParams } from 'react-router-dom';
 import Upload from './upload';
 import Delete from './delete';
+import CaseContract from '../../case'
 
-function View() {
+
+function View(props) {
   const [pin, setPin] = useState([]);
   const { id } = useParams();
   const [star, setStar] = useState(0);
@@ -17,59 +19,29 @@ function View() {
   const fetch = require("node-fetch");
   useEffect(()=>{
     let star;
-  //    const fetchStar = async () =>{
-  //      try{
-  //       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-  //        const add = accounts[0]; // Assuming user has at least one address   
-  //        //console.log(add);     
-  //       let id= await minor.methods.id(accounts[0]).call(); 
-  //       id = parseInt(id);        
-  //       const userStarValue = await minor.methods.members(id-1).call();
-  //        setStar(parseInt(userStarValue.star));
-  //        console.log(star);
-  //     }catch (error) {
-  //       console.error('Error fetching   user star value:', error);
-  //   }      
-  //  };
-  // fetchStar();
+     const fetchStar = async () =>{
+       try{
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+         const add = accounts[0]; // Assuming user has at least one address   
+         //console.log(add);     
+        let id= await minor.methods.id(accounts[0]).call(); 
+        id = parseInt(id);        
+        const userStarValue = await minor.methods.members(id-1).call();
+         setStar(parseInt(userStarValue.star));
+         console.log(userStarValue);
+      }catch (error) {
+        console.error('Error fetching   user star value:', error);
+    }      
+   };
+  fetchStar();
  },[id]);    
-    //yaha pr user ki kitni restriction hai woh call kro
-    //profile.jsx pr user details call kri hai similar function bnega
-    //bs user details.star value nikalni hai apne ko
-
   
   const fetchPins = async () => {
     console.log("code running");
     try {
       let pinHashes = [];
-      let pageOffset = 0;
-      let hasMore = true;
-
-      while (hasMore === true) {
-        try {
-          const response = await fetch(`${PIN_QUERY}&pageOffset=${pageOffset}`, {
-            method: 'GET',
-            headers: {
-              accept: 'application/json',
-              Authorization: PINATA_JWT
-            }
-          });
-
-          const responseData = await response.json();
-          const rows = responseData.rows;
-
-          if (rows.length === 0) {
-            hasMore = false;
-          }
-
-          const itemsReturned = rows.length;
-          pinHashes.push(...rows.map(row => row.ipfs_pin_hash));
-          pageOffset += itemsReturned;
-        } catch (error) {
-          console.log(error);
-          break;
-        }
-      }
+      const Case = CaseContract(props.url);
+      pinHashes= await Case.methods.fetchAddr().call();    
 
       console.log('Total pins fetched: ', pinHashes.length);
       setPin(pinHashes);
@@ -96,7 +68,7 @@ function View() {
   return (
     <>
       {star === 0 ? (
-        <Upload fetchPins={fetchPins} />
+        <Upload url={props.url} fetchPins={fetchPins} />
       ) : (
         <div>You don't have access to upload files</div>
       )}

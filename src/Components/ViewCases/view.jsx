@@ -36,6 +36,7 @@ function View(props) {
             console.log(error)
         }
     };
+
     return (
         <>
         <form className='viewcases' onSubmit={handleSubmit}>
@@ -47,8 +48,8 @@ function View(props) {
               type='datetime-local'
               placeholder='Date Of Filing'
               name='date'
-            
               onChange={handleChange}
+              fluid
             />
           </div>
           <h3>Enter Your Client's Address: </h3>
@@ -58,11 +59,11 @@ function View(props) {
               type='input'
               placeholder='Client Address'
               name='address'
-              
               onChange={handleChange}
+              fluid
             />
           </div>
-          <Button className='viewcases--button' loading={loading} type='submit'>Submit</Button>
+          <button className='custom-button' loading={loading} type='submit'>Submit</button>
         </form>
         </>
 );

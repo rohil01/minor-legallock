@@ -1,6 +1,28 @@
-.viewcases div{
+.viewcases div {
     margin-top: 5px;
     margin-bottom: 5px;
-    
-
-}
+  }
+  
+  .custom-input {
+    border: none;
+    outline: 1px solid #ddd;
+    outline-offset: 2px;
+    padding: 8px;
+    border-radius: 4px;
+    font-family: sans-serif;
+  }
+  
+  .custom-button {
+    background-color: #7e352e;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: sans-serif;
+  }
+  
+  .custom-button:hover {
+    background-color: #7e352e;
+  }
+  

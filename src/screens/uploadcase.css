@@ -1,0 +1,17 @@
+
+.uploadcase {
+    margin: auto; 
+    display: flex; 
+    color: white;
+    text-align: center;
+    flex-direction: row; 
+    justify-content: flex-start; 
+    align-items: center;
+    background-color: rgba(16, 15, 15, 0.8); 
+    border: 1px solid #ddd; 
+    border-radius: 8%;
+    padding: 10px; 
+    width: fit-content; 
+  }
+  
+  

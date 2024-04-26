@@ -86,7 +86,7 @@ class DashboardScreen extends React.Component {
     return (
       <div className="dashboardScreen">
         <Navbar />
-        <Button primary color='#1A4D2E' onClick={this.redirectToNewPage}>Create New Case</Button>
+        <button primary color='#1A4D2E' onClick={this.redirectToNewPage}>Create New Case</button>
         <Card.Group>{this.renderCases()}</Card.Group>
       </div>
     );

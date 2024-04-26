@@ -1,53 +1,40 @@
 .dashboardScreen {
     padding-top: 15vh;
     height: 100vh;
-    background-color: #beb383;
-    background-image: '../../Assets/home.jpg';
+    background-color: #f1f4fb;
+    background-image: url("../Assets/lawyer.jpg");
     padding-left: 10px;
     padding-right: 10px;
   }
-  /* .container {
-    margin-top: 56px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    max-width: 600px;
-    padding: 20px;
-    box-sizing: border-box;
-  } */
-  
+ 
   h1 {
     font-size: 24px;
     margin-bottom: 20px;
   }
-  
-  /* .optionContainer {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-top: 20px;
-  }
-   */
-  .dashboardScreen Button {
+
+  .dashboardScreen button {
     margin-bottom: 10px !important;
+    background-color: #7e352e;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: sans-serif;
+    font-size: 15px;
   }
-/*   
-  .button:hover {
-    background-color: #303132;
-    color: #fff;
-  } */
+
+  .dashboardScreen button:hover{
+    background-color: #784444;
+  }
 
 .dashboardScreen {
-  /* background-image: url("https://wallpapers.com/rick-and-morty");  */
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   height: 100vh; 
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: flex-start;
 }
 
@@ -65,10 +52,13 @@
 
 .ui.card {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 4px 10px rgba(0, 0, 0, 0.24); 
+  border-color: black;
   border-radius: 9% !important; 
   width: 50rem;
   max-width: 90%;
   margin: 1cm;
+  opacity: 80%;
+
 }
 
 .ui.card .description {
@@ -80,10 +70,6 @@
   max-height: 5rem; 
 }
 
-.ui.card:hover.hover{
-  background-color: #7e352e;
-  cursor: pointer;
-}
   @media (max-width: 768px) {
     .dashboardScreen {
       padding-top: 60px; 

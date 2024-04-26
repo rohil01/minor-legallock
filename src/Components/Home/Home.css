@@ -7,7 +7,10 @@ body {
   height: 100vh;
   margin: 0;
 }
+/* .home-container{
+  background-image: url("../../Assets/home.jpg"); 
 
+} */
 .content-container {
   flex: 1; 
   color: white; 

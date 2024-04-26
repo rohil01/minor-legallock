@@ -8,7 +8,7 @@
   justify-content: space-between;
   
   padding: 10px 20px;
-  background-color: rgb(0, 0, 0, 0.7);
+  background-color: rgb(0, 0, 0, 1);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -18,7 +18,7 @@
   list-style-type: none;
   
   margin: 0;
-  padding-right: 46vw;
+  padding-right: 50vw;
   justify-content: center;
 }
 
@@ -50,12 +50,12 @@
 
 .Navbar li:hover {
   color: white;
-  background-color: #4F6F52;
+  background-color: #7e352e;
 }
 
 .Navbar li a:hover{
   color: white;
-  background-color: #4F6F52;
+  background-color: #7e352e;
 }
 
 .Navbar a:visited {

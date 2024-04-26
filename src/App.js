@@ -33,6 +33,7 @@ const App = () => {
         <Route path="/uploadfile" element={<UploadFileScreen />} /> */}
         <Route path="/dashboard/cases/:url" element={<Caseview />} />
         <Route path="/profile/:id" element={<Profile />} />
+        <Route path="/Home" element={<Home />} />
         
 
       </Routes>

@@ -35,9 +35,9 @@ const Navbar = () => {
     <div className={`Navbar ${isDarkMode ? 'dark-mode' : ''}`}>
       <img src={isDarkMode ? logo_light : logo_dark} style={{ width: '200px', height: 'auto' }} alt="LegalLock " className="logo" />
       <ul>
-        <li><Link to="/dashboard">Home</Link></li>
+        <li><Link to="/Home">Home</Link></li>
         <li onClick={handleProfileClick}>Profile</li>
-        <li><Link to="/DashboardScreen">Dashboard</Link></li>
+        <li><Link to="/dashboard">Dashboard</Link></li>
         <li>
           <a href="mailto:youremail@example.com">Contact Us</a>
         </li>

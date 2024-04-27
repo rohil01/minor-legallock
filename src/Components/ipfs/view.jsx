@@ -4,7 +4,7 @@ import minor from '../../minor';
 import { useParams } from 'react-router-dom';
 import Upload from './upload';
 import Delete from './delete';
-import CaseContract from '../../case'
+import CaseContract from '../../case';
 
 
 function View(props) {
@@ -13,35 +13,35 @@ function View(props) {
   const [star, setStar] = useState(0);
   const [pinsFetched, setPinsFetched] = useState(false); // State to track if pins have been fetched
   const [loading, setLoading] = useState(true); // State to track loading state
+  const [fileNames, setFileNames] = useState({}); // State to store file names
 
   const PINATA_JWT = `Bearer ${process.env.REACT_APP_JWT}`;
   const PIN_QUERY = `https://api.pinata.cloud/data/pinList?status=pinned&pageLimit=1000&includeCount=false`;
   const fetch = require("node-fetch");
-  useEffect(()=>{
-    let star;
-     const fetchStar = async () =>{
-       try{
+
+  useEffect(() => {
+    const fetchStar = async () => {
+      try {
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
         const add = accounts[0]; // Assuming user has at least one address   
             
-        let id= await minor.methods.id(accounts[0]).call(); 
+        let id = await minor.methods.id(accounts[0]).call(); 
         id = parseInt(id);        
         const userStarValue = await minor.methods.members(id-1).call();
         setStar(parseInt(userStarValue.star));
-        console.log(userStarValue);
-      }catch (error) {
-        console.error('Error fetching   user star value:', error);
-    }      
-   };
-  fetchStar();
- },[id]);    
+      } catch (error) {
+        console.error('Error fetching user star value:', error);
+      }      
+    };
+    fetchStar();
+  }, [id]);    
   
   const fetchPins = async () => {
     console.log("code running");
     try {
       let pinHashes = [];
       const Case = CaseContract(props.url);
-      pinHashes= await Case.methods.fetchAddr().call();    
+      pinHashes = await Case.methods.fetchAddr().call();    
 
       console.log('Total pins fetched: ', pinHashes.length);
       setPin(pinHashes);
@@ -52,18 +52,40 @@ function View(props) {
   };
 
   useEffect(() => {
-    console.log("render")
     if (!pinsFetched) { // Check if pins have not been fetched yet
       fetchPins();
     }
   }, [pinsFetched]); // Run only when pinsFetched changes
 
   useEffect(() => {
-    console.log(pin)
     if (pin.length >= 0) {
       setLoading(false); // Set loading to false when pins are fetched
+      fetchFileNames();
     }
   }, [pin]); // Run whenever pin value changes
+
+  const fetchFileNames = async () => {
+    const names = {};
+    for (const value of pin) {
+      let x= await fetch(`https://${process.env.REACT_APP_URL}/ipfs/${value}`,{
+        headers: {
+          Authorization: `Bearer ${process.env.REACT_APP_JWT}`
+        }
+      }).then(res => res.json()).then(data => {
+      x = data;
+      });
+      // const res = fetch(`http://${process.env.REACT_APP_URL}/ipfs/${value}`,{
+      //   headers: {
+      //     Authorization: `Bearer ${process.env.REACT_APP_JWT}`
+      //   }
+      // });
+      // const resData= await res.json();
+      
+      // console.log(resData);
+      // names[value] = resData.name; // Assuming the name is present in the fetched data
+    }
+    setFileNames(names);
+  };
 
   return (
     <>
@@ -77,15 +99,14 @@ function View(props) {
         {
           pin.map((value, index) => (
             <ul key={index}>
-              <a href={`${process.env.REACT_APP_URL}/ipfs/${value}`} target="_blank" rel="noopener noreferrer">
-                {value}
+              <a href={`https://${process.env.REACT_APP_URL}/ipfs/${value}`} target="_blank" rel="noopener noreferrer">
+                {fileNames[value] || 'Loading...'}
               </a>
-              {star===0?(
+              {star === 0 ? (
                 <Delete index={index} value={value} fetchPins={fetchPins}/>
-              ):
-              (<></>)
-              }
-              
+              ) : (
+                <></>
+              )}
             </ul>
           ))
         }
@@ -95,4 +116,3 @@ function View(props) {
 }
 
 export default View;
-  

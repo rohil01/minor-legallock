@@ -7,7 +7,7 @@ import web3 from '../../web3';
 
 function View(props) {
   const [selectedFile, setSelectedFile] = useState()
-  const [cid, setCid] = useState()
+  // const [cid, setCid] = useState()
 // this 
     const changeHandler = event => {
       setSelectedFile(event.target.files[0])
@@ -37,33 +37,28 @@ function View(props) {
           }
         )
           const resData = await res.json()
-          setCid(resData.IpfsHash)
-          console.log(resData)
-          //props.fetchPins();
-           await uploadHash(resData.IpfsHash);
+          
+          await uploadHash(resData.IpfsHash);
         } catch (error) {
           console.log(error)
       }
-    };
+    }
     const uploadHash = async (x) => {
+      
       try {        
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-        // Call the upload function of the File contract
-        //console.log("f", props.url);
-    
         const Case1 = CaseContract(props.url);
-        const result = web3.utils.sha3(x);
-        console.log(result);
         await Case1.methods.upload(x).send({
           from: accounts[0],
-          gas: '1000000'
+          gas: '9000000'
         });
         console.log('Hashcode uploaded successfully.');
-        
+        props.fetchPins();
       } catch (error) {
         console.error('Error uploading hashcode:', error);
       }
-    };
+    } 
+    
     return (
       <>
     <div className="upload-container">

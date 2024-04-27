@@ -6,7 +6,7 @@ const EventEmitter = require('events');
 EventEmitter.defaultMaxListeners = 15;
 const provider = new HDWalletProvider(
   'search shuffle inner gadget trend pluck man poverty pen frequent permit phone',
-  'https://sepolia.infura.io/v3/b83452b844994177953b59f7591c4f6d'
+  'https://sepolia.infura.io/v3/41f60965f086421f9ae3bc8bec612145'
 );
 
 
@@ -24,7 +24,7 @@ const deploy = async () => {
   console.log("Minor Contract deployed to", result.options.address);
   const result2 = await new web3.eth.Contract(caseFactory.abi)
     .deploy({data:caseFactory.evm.bytecode.object})
-    .send({gas:"1000000", from:accounts[0]});
+    .send({gas:"1406699", from:accounts[0]});
 
   console.log("Case Factory deployed to ", result2.options.address);
   provider.engine.stop();

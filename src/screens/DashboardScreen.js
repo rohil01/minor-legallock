@@ -6,6 +6,7 @@ import './DashboardScreen.css';
 import Case from '../case.js'
 import minor from '../minor.js'
 import '../index.css'
+
 class DashboardScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -20,11 +21,9 @@ class DashboardScreen extends React.Component {
     const fetchData = async () => {
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       const id = await minor.methods.id(accounts[0]).call();
-      // console.log(accounts);
       const userDetails = await minor.methods.members(parseInt(id) - 1).call();
 
       const addresses = await CaseFactory.methods.returnAddress1(accounts[0]).call();
-      // console.log(addresses);
       this.setState({ cases: addresses });
     };
 
@@ -37,7 +36,7 @@ class DashboardScreen extends React.Component {
         try {
           const promises = this.state.cases.map(async (address) => { //promises yahan hai
             const Cases = Case(address);
-            return await Cases.methods.returnDetails().call();
+            return await Cases.methods.newdetails().call();
           });
           const resolvedDetails = await Promise.all(promises);
 

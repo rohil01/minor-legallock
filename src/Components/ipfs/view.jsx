@@ -22,13 +22,13 @@ function View(props) {
      const fetchStar = async () =>{
        try{
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-         const add = accounts[0]; // Assuming user has at least one address   
-         //console.log(add);     
+        const add = accounts[0]; // Assuming user has at least one address   
+            
         let id= await minor.methods.id(accounts[0]).call(); 
         id = parseInt(id);        
         const userStarValue = await minor.methods.members(id-1).call();
-         setStar(parseInt(userStarValue.star));
-         console.log(userStarValue);
+        setStar(parseInt(userStarValue.star));
+        console.log(userStarValue);
       }catch (error) {
         console.error('Error fetching   user star value:', error);
     }      
@@ -81,7 +81,7 @@ function View(props) {
                 {value}
               </a>
               {star===0?(
-                <Delete value={value} fetchPins={fetchPins}/>
+                <Delete index={index} value={value} fetchPins={fetchPins}/>
               ):
               (<></>)
               }

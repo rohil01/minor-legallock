@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: MIT
 
 pragma solidity ^0.8.9;
- 
+pragma experimental ABIEncoderV2;
+
 contract Minor {
     address public admin;
     struct member {
@@ -23,7 +24,7 @@ contract Minor {
         newMember.name= "Admin";
         newMember.adhaar=12345678912;
         newMember.age=25;
-        newMember.star=3;    
+        newMember.star=0;    
         newMember.id= 1;   
         newMember.add= admin;
         id[admin]= memberId;
@@ -68,54 +69,41 @@ contract CaseFactory{
     
 }
 contract Case{
-    uint caseid;
-    uint dof;
-    address lawyer;
-    address client;
     
+
     struct details{
         uint caseid;
         uint dof;
         address lawyer;
         address client;
     }
+    details public newdetails;
     constructor (uint caseID, address lawyerAddress, address clientAddress, uint dateOfFiling){
-        lawyer = lawyerAddress;
-        client = clientAddress;
-        dof = dateOfFiling;
-        caseid = caseID;
+        newdetails.lawyer = lawyerAddress;
+        newdetails.client = clientAddress;
+        newdetails.dof = dateOfFiling;
+        newdetails.caseid = caseID;
     }
-     function returnDetails()public view returns(details memory) {
-        details memory caseDetails;
-        caseDetails.lawyer = lawyer;
-        caseDetails.client = client;
-        caseDetails.dof = dof;
-        caseDetails.caseid = caseid;
-        return caseDetails;
-    }
-    
     struct fileDetails{
         string addr;
         uint dateTime;
         address addrUpload;
         bool exist;
     }
-    mapping(address => fileDetails)fileMap;
+    fileDetails [] file;
+    mapping(address => fileDetails)fileMap;//string ke jgh cid aayega yaani ki address
     //array of address;
     string [] public IPFSAdd;
-     
-    //function to upload files in array
-    function fetchAddr() public view returns(string[] memory){
-        return IPFSAdd;
+
+    function fetchAddr() public view returns(string [] memory){
+        return IPFSAdd; 
     }
-    function upload(string memory addr) public returns(fileDetails memory){
+    function upload(string memory addr) public {
+        fileDetails memory files= file.push();
+        files.addr= addr;
+        files.dateTime= block.timestamp;
+        files.addrUpload= msg.sender;
+        files.exist=true;
         IPFSAdd.push(addr);
-        fileDetails memory file; 
-        file.addr= addr;
-        file.dateTime= block.timestamp;
-        file.addrUpload= msg.sender;
-        file.exist=true;
-        return file;
     }
-    
 }

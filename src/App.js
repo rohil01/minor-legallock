@@ -29,8 +29,6 @@ const App = () => {
         <Route path="/dashboard/new" element={<UploadCase />} />
         <Route path="/viewfile" element={<ViewFile />} /> 
         <Route path="/view" element={<View />} /> 
-        {/* <Route path="/filelist" element={<FileListScreen />} />
-        <Route path="/uploadfile" element={<UploadFileScreen />} /> */}
         <Route path="/dashboard/cases/:url" element={<Caseview />} />
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/Home" element={<Home />} />

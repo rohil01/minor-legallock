@@ -48,8 +48,7 @@ class SignupForm extends Component {
     alert("You will be registered within 2 days!");
     //this.props.history.push('/');
   };
-
-  
+   
   handleLoginClick = (e) => {
     e.preventDefault();
       // this.props.history.push('/');
@@ -60,60 +59,62 @@ class SignupForm extends Component {
 
     return (
       //include body tag
-      <div classname = "Signup-body">
-      <div className='Signup--wrapper'>
+      <div className='sign--bod'>
+        <div className='Signup--wrapper'>
 
-        <form className='Signup--form' onSubmit={this.handleSubmit}>
-          <h1>Signup for LegalLock</h1>
+          <form className='Signup--form' onSubmit={this.handleSubmit}>
+            <h1>Signup for LegalLock</h1>
 
-          <div className='input-box'>
-            <input
-              type='text'
-              placeholder='Name'
-              name='name'
-              value={name}
-              onChange={this.handleChange}
-            />
+            <div className='input-box'>
+              <input
+                type='text'
+                placeholder='Name'
+                name='name'
+                value={name}
+                onChange={this.handleChange}
+              />
+            </div>
+
+            <div className='input-box'>
+              <input
+                type='number'
+                placeholder='Adhaar'
+                name='adhaar'
+                value={adhaar}
+                onChange={this.handleChange}
+              />
+            </div>
+
+            <div className='input-box'>
+              <input
+                type='number'
+                placeholder='Age'
+                name='age'
+                value={age}
+                onChange={this.handleChange}
+              />
+            </div>
+
+            <div className='input-box'>
+              <input
+                type='number'
+                placeholder='Star'
+                name='star'
+                value={star}
+                onChange={this.handleChange}
+              />
+            </div>
+
+            <button className= 'Signupformbutton' type='submit'>Signup</button>
+
+            <div className='register-link' onClick={this.handleLoginClick}>
+              <p>Already have an account? <Link to ="/">Login</Link></p>
+            </div>
+          </form>
           </div>
-
-          <div className='input-box'>
-            <input
-              type='number'
-              placeholder='Adhaar'
-              name='adhaar'
-              value={adhaar}
-              onChange={this.handleChange}
-            />
-          </div>
-
-          <div className='input-box'>
-            <input
-              type='number'
-              placeholder='Age'
-              name='age'
-              value={age}
-              onChange={this.handleChange}
-            />
-          </div>
-
-          <div className='input-box'>
-            <input
-              type='number'
-              placeholder='Star'
-              name='star'
-              value={star}
-              onChange={this.handleChange}
-            />
-          </div>
-
-          <button className= 'Signupformbutton' type='submit'>Signup</button>
-
-          <div className='register-link' onClick={this.handleLoginClick}>
-            <p>Already have an account? <Link to ="/">Login</Link></p>
-          </div>
-        </form>
       </div>
-      </div>
+        
+      
     );
   }
 }

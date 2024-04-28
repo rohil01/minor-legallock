@@ -1,5 +1,5 @@
-.Signup-body{
-  background-image: url("../../Assets/login.jpg");
+.sign--bod{
+  background-image: url("../../Assets/login.jpg") ;
   background-size: cover;
   background-position: center;
   align-items: center;

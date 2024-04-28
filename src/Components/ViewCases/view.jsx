@@ -12,6 +12,7 @@ function View(props) {
       });
       const handleChange = (e) => {
         const { name, value } = e.target;
+        console.log(value);
         setFormData(prevState => ({
           ...prevState,
           [name]: value
@@ -21,7 +22,9 @@ function View(props) {
         e.preventDefault();
         setLoading(true)
         const dateObject = new Date(formData.date);
+        console.log(dateObject);
         const timestamp = dateObject.getTime();
+        console.log(timestamp);
         try {  
             const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
             let id= await minor.methods.id(accounts[0]).call();

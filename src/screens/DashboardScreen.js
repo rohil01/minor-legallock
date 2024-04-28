@@ -8,9 +8,8 @@ import minor from '../minor.js'
 import '../index.css'
 
 const FormattedTimestamp = ({ timestamp }) => {
-  
   try {
-    const date = new Date(parseInt(timestamp) * 1000); 
+    const date = new Date(parseInt(timestamp)); 
     return <span>{date.toLocaleString()}</span>;
   } catch (error) {
     console.error('Error formatting timestamp:', error);
@@ -32,9 +31,17 @@ class DashboardScreen extends React.Component {
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       const id = await minor.methods.id(accounts[0]).call();
       const userDetails = await minor.methods.members(parseInt(id) - 1).call();
-
-      const addresses = await CaseFactory.methods.returnAddress1(accounts[0]).call();
-      this.setState({ cases: addresses });
+      if(userDetails.star==0)
+      {
+        const addresses = await CaseFactory.methods.returnAddress1(accounts[0]).call();
+        this.setState({ cases: addresses });
+      }
+      else if(userDetails.star==2)
+      {
+        const addresses = await CaseFactory.methods.returnAddress2(accounts[0]).call();
+        this.setState({ cases: addresses });
+      }
+      
     };
 
     fetchData();

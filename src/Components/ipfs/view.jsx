@@ -38,6 +38,8 @@ function View(props) {
   
   const fetchPins = async () => {
     console.log("code running");
+    
+    
     try {
       let pinHashes = [];
       const Case = CaseContract(props.url);
@@ -100,7 +102,8 @@ function View(props) {
           pin.map((value, index) => (
             <ul key={index}>
               <a href={`https://${process.env.REACT_APP_URL}/ipfs/${value}`} target="_blank" rel="noopener noreferrer">
-                {fileNames[value] || 'Loading...'}
+                {/* {fileNames[value] || 'Loading...'} */}
+                {value}
               </a>
               {/* {star === 0 ? (
                 <Delete index={index} value={value} fetchPins={fetchPins}/>

@@ -7,16 +7,26 @@ import Case from '../case.js'
 import minor from '../minor.js'
 import '../index.css'
 
+const FormattedTimestamp = ({ timestamp }) => {
+  
+  try {
+    const date = new Date(parseInt(timestamp) * 1000); 
+    return <span>{date.toLocaleString()}</span>;
+  } catch (error) {
+    console.error('Error formatting timestamp:', error);
+    return <span>Error: Invalid timestamp</span>; 
+  }
+};
+
 class DashboardScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { //two variables
+    this.state = {
       cases: [],
       details: [],
     };
   }
 
-  //fetching details via contractss
   componentDidMount() {
     const fetchData = async () => {
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
@@ -31,16 +41,15 @@ class DashboardScreen extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.cases !== this.state.cases) { //checks change
+    if (prevState.cases !== this.state.cases) {
       const fetchDetails = async () => {
         try {
-          const promises = this.state.cases.map(async (address) => { //promises yahan hai
+          const promises = this.state.cases.map(async (address) => {
             const Cases = Case(address);
             return await Cases.methods.newdetails().call();
           });
           const resolvedDetails = await Promise.all(promises);
 
-          
           this.setState({ details: resolvedDetails });
         } catch (error) {
           console.error('Error fetching details:', error);
@@ -52,30 +61,29 @@ class DashboardScreen extends React.Component {
   }
 
   renderCases = () => {
-
-  return this.state.details.map((detail, index) => (
-    <Card key={index} href={`/dashboard/cases/${this.state.cases[index]}`}>
-      <Card.Content>
-        <Card.Header>
-        {"Case Id: " + `${detail.caseid}`}
-        </Card.Header>
-        <Card.Description>
-          {"Description Of Case " + `${detail.caseid}`}
-        </Card.Description>
-        <Card.Description>
-          {"Lawyer Address: " + `${detail.lawyer}`}
-        </Card.Description>
-        <Card.Description>
-          {"Client Address: " + `${detail.client}`}
-        </Card.Description>
-        <Card.Description>
-          {"Timestamp: " + `${detail.dof}`}
-        </Card.Description>
-      </Card.Content>
-    </Card>
-  ));
-};
-
+    return this.state.details.map((detail, index) => (
+      <Card key={index} href={`/dashboard/cases/${this.state.cases[index]}`}>
+        <Card.Content>
+          <Card.Header>
+            {"Case Id: " + `${detail.caseid}`}
+          </Card.Header>
+          <Card.Description>
+            {"Description Of Case " + `${detail.caseid}`}
+          </Card.Description>
+          <Card.Description>
+            {"Lawyer Address: " + `${detail.lawyer}`}
+          </Card.Description>
+          <Card.Description>
+            {"Client Address: " + `${detail.client}`}
+          </Card.Description>
+          <Card.Description>
+            {"Timestamp: "}
+            <FormattedTimestamp timestamp={detail.dof} />
+          </Card.Description>
+        </Card.Content>
+      </Card>
+    ));
+  };
 
   redirectToNewPage = () => {
     window.location.href = '/dashboard/new';

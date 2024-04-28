@@ -14,7 +14,7 @@
   margin: 0 auto;
   background: transparent;
   border: 2px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 10px rgba(197, 194, 194, 0.2);
   backdrop-filter: blur(20px);
   color: #030202;
   border-radius: 10px;
@@ -31,7 +31,7 @@
 .Signup--wrapper h1{
   font-size: 36px;
   text-align: center;
-  color: rgb(41, 38, 38);
+  color: rgb(221, 220, 220);
 }
 
 .Signup--wrapper .input-box {
@@ -49,12 +49,12 @@
   border: 2px solid rgba(146, 86, 86, 0.2);
   border-radius: 40px;
   font-size: 16px;
-  color: #030202;
+  color: #cccccc;
   padding: 20px 45px 20px 20px;
 }
 
 .input-box input::placeholder{
-  color: #030202;
+  color: #7d7d7d;
 }
 
 .input-box .icon{
@@ -90,14 +90,14 @@
   margin-top: 30px;
   width: 100%;
   height: 45px;
-  background: #fff;
-  border: none;
+  background: transparent;
+  border: 2px solid rgba(146, 86, 86, 0.2);
   outline: none;
   border-radius: 45px;
-  box-shadow: 0 0 15px rgba(0,0,0,.1);
+  box-shadow: 0 0 15px rgba(137, 135, 135, 0.1);
   cursor: pointer;
   font-size: 16px;
-  color: #333;
+  color: #646363;
   font-weight: 700;
 }
 
@@ -106,7 +106,7 @@
 }
 
 .Signup--wrapper p{
-  color: rgb(38, 35, 35);
+  color: rgb(182, 181, 181);
 }
 
 .Signup--wrapper .register-link {
@@ -116,7 +116,7 @@
 }
 
 .register-link p a {
-  color: #171717;
+  color: #5f5d5d;
   text-decoration: none;
   font-weight: 600;
   font-style: italic;

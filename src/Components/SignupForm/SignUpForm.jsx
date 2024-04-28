@@ -58,7 +58,6 @@ class SignupForm extends Component {
     const { name, adhaar, age, star } = this.state;
 
     return (
-      //include body tag
       <div className='sign--bod'>
         <div className='Signup--wrapper'>
 

@@ -102,11 +102,11 @@ function View(props) {
               <a href={`https://${process.env.REACT_APP_URL}/ipfs/${value}`} target="_blank" rel="noopener noreferrer">
                 {fileNames[value] || 'Loading...'}
               </a>
-              {star === 0 ? (
+              {/* {star === 0 ? (
                 <Delete index={index} value={value} fetchPins={fetchPins}/>
               ) : (
                 <></>
-              )}
+              )} */}
             </ul>
           ))
         }

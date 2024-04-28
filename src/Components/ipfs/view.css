@@ -1,51 +1,14 @@
 .upload-container {
-    margin-bottom: 20px; 
-  }
-  
-  .form-label {
-    margin-right: 10px;
-  }
-  
-  .button {
-    margin-top: 10px;
-  }
-  
-  .upload-container, .file-container {
-    display: inline-block; 
-  }
-  
-  .file-container {
-    margin-left: 20px; 
-  }
-  
+  margin-bottom: 20px;
+}
 
-  .upload-container, .file-container {
-    border: 1px solid #000000; 
-    padding: 10px; 
-  }
-  
-  .upload-container h3, .file-container h3 {
-    font-size: 16px; 
-    margin-bottom: 5px;
-  }
-  
-  .file-container li {
-    font-size: 14px;
-    margin-bottom: 5px; 
-  }
-  
-  h2 {
-    color:aliceblue;
-    font-size: 20px;
-    margin-bottom: 20px;
-  }
-  
- 
-/* .main-container {
-  display: grid;
-  grid-template-columns: 1fr 2fr; 
-  grid-gap: 10px;
-} */
+.form-label {
+  margin-right: 10px;
+}
+
+.button {
+  margin-top: 10px;
+}
 
 .upload-container,
 .file-container {
@@ -54,14 +17,12 @@
   padding: 15px 20px;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  background-color: rgba(92, 74, 74, 0.614);
-  margin: 10px;
+  margin: 20px auto;
+  flex: 1;
+  background-color: rgba(16, 15, 15, 0.8);
+  border-radius: 7px;
+  border: 1px solid #ddd; 
 }
-
-.main-container > .upload-container {
-  flex: 2;
-}
-
 
 .upload-container h3,
 .file-container h3 {
@@ -88,5 +49,15 @@
 }
 
 .upload-container button:hover {
-  background-color:#303132;
+  background-color: #303132;
 }
+
+/* body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: aliceblue;
+  background-image: url("../../Assets/lawyer.jpg");
+
+} */

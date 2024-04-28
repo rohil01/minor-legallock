@@ -50,7 +50,7 @@ function View(props) {
         const Case1 = CaseContract(props.url);
         await Case1.methods.upload(x).send({
           from: accounts[0],
-          gas: '9000000'
+          gas: '1000000'
         });
         console.log('Hashcode uploaded successfully.');
         props.fetchPins();

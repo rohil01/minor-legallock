@@ -4,7 +4,7 @@ import CaseFactory from './ethereum/build/CaseFactory.json'
 
 const instance2 = new web3.eth.Contract(
   CaseFactory.abi,
-  "0x0838978AaD72Ba3f2E18C069282604f22A37FFA6"
+  "0x152e84E11fd37Dc0B5bD5fa359C2D3F9Af59f42D"
 );
  
 export default instance2;

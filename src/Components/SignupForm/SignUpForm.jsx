@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './SignupForm.css'; 
+//import '../LoginForm/Loginform.css';
 import { Link } from 'react-router-dom';
 
 class SignupForm extends Component {
@@ -58,8 +59,11 @@ class SignupForm extends Component {
     const { name, adhaar, age, star } = this.state;
 
     return (
-      <div className='wrapper'>
-        <form onSubmit={this.handleSubmit}>
+      //include body tag
+      <div classname = "Signup-body">
+      <div className='Signup--wrapper'>
+
+        <form className='Signup--form' onSubmit={this.handleSubmit}>
           <h1>Signup for LegalLock</h1>
 
           <div className='input-box'>
@@ -102,12 +106,13 @@ class SignupForm extends Component {
             />
           </div>
 
-          <button type='submit'>Signup</button>
+          <button className= 'Signupformbutton' type='submit'>Signup</button>
 
-          <div className='login-link' onClick={this.handleLoginClick}>
+          <div className='register-link' onClick={this.handleLoginClick}>
             <p>Already have an account? <Link to ="/">Login</Link></p>
           </div>
         </form>
+      </div>
       </div>
     );
   }

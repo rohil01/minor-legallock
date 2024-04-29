@@ -77,6 +77,9 @@ contract CaseFactory{
     function returnAddress2(address addr) public view returns(address [] memory) {
         return (clientcases[addr]);
     } 
+    function returnAddress3(address addr) public view returns(address [] memory) {
+        return (judgecases[addr]);
+    } 
     
 }
 contract Case{

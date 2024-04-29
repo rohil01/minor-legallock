@@ -43,6 +43,11 @@ class DashboardScreen extends React.Component {
         const addresses = await CaseFactory.methods.returnAddress2(accounts[0]).call();
         this.setState({ cases: addresses });
       }
+      else if(userDetails.star==0)
+      {
+        const addresses = await CaseFactory.methods.returnAddress3(accounts[0]).call();
+        this.setState({ cases: addresses });
+      }
       
     };
 

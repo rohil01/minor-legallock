@@ -49,7 +49,7 @@ class Loginform extends Component{
           console.log("admin")
         }
         setTimeout(() => {
-          // window.location.href = '/dashboard'; 
+          window.location.href = '/dashboard'; 
           console.log("redirecting")
         }, 1000);
       }

@@ -31,7 +31,7 @@ class DashboardScreen extends React.Component {
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       const id = await minor.methods.id(accounts[0]).call();
       const userDetails = await minor.methods.members(parseInt(id) - 1).call();
-      if(userDetails.star==0)
+      if(userDetails.star==1)
       {
         const addresses = await CaseFactory.methods.returnAddress1(accounts[0]).call();
         this.setState({ cases: addresses });

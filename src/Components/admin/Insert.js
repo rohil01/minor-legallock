@@ -74,6 +74,15 @@ function Insert(props) {
             />
           </div>
           <h3>Enter Star: </h3>
+          <div className='viewcases--inputbox2'>
+            <Input
+              type='input'
+              placeholder='Star'
+              name='star'
+              onChange={handleChange}
+              fluid
+            />
+          </div>
           <h3>Enter Address: </h3>
           
           <div className='viewcases--inputbox2'>

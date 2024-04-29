@@ -35,7 +35,6 @@ function View(props) {
         console.log(userStarValue.star);
         
         const judge= await CaseFactory.methods.CaseToJudge(props.url).call();
-        
         setJ((judge))
       } catch (error) {
         console.error('Error fetching user star value:', error);
@@ -103,14 +102,12 @@ function View(props) {
       ) : (
         <div></div>
       )}
-      {(star === 4 && jud!==fun) ? (
+      {(jud!==fun) ? (
         <div className='admin-container'>
           <div>Judge Address is: {jud}</div>
         </div>
-        
-        
       ) : (
-        <div></div>
+        <div className='admin-container'>Judge Is Not Assigned</div>
       )}
 
       <div className="file-container">

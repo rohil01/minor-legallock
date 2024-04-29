@@ -13,8 +13,8 @@ import ViewFile from './screens/viewFile';
 import DeleteFile from './screens/deleteFile';
 import UploadCase from './screens/uploadcase.jsx'
 import Caseview from './screens/Caseview.js' //here
-
-
+import Admin from './screens/Admin.js'
+import Insert from './screens/Insertmember.js'
 const App = () => {
 
 
@@ -32,8 +32,8 @@ const App = () => {
         <Route path="/dashboard/cases/:url" element={<Caseview />} />
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/Home" element={<Home />} />
-        
-
+        <Route path="/admin" element={<Admin/>} />
+        <Route path="/admin/new" element={<Insert />} />
       </Routes>
     </Router>
     </div>

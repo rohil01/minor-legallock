@@ -15,8 +15,6 @@ function View(props) {
   const [loading, setLoading] = useState(true); // State to track loading state
   const [fileNames, setFileNames] = useState({}); // State to store file names
 
-  const PINATA_JWT = `Bearer ${process.env.REACT_APP_JWT}`;
-  const PIN_QUERY = `https://api.pinata.cloud/data/pinList?status=pinned&pageLimit=1000&includeCount=false`;
   const fetch = require("node-fetch");
 
   useEffect(() => {
@@ -69,13 +67,13 @@ function View(props) {
   const fetchFileNames = async () => {
     const names = {};
     for (const value of pin) {
-      let x= await fetch(`https://${process.env.REACT_APP_URL}/ipfs/${value}`,{
-        headers: {
-          Authorization: `Bearer ${process.env.REACT_APP_JWT}`
-        }
-      }).then(res => res.json()).then(data => {
-      x = data;
-      });
+      // let x= await fetch(`https://${process.env.REACT_APP_URL}/ipfs/${value}`,{
+      //   headers: {
+      //     Authorization: `Bearer ${process.env.REACT_APP_JWT}`
+      //   }
+      // }).then(res => res.json()).then(data => {
+      // x = data;
+      // });
       // const res = fetch(`http://${process.env.REACT_APP_URL}/ipfs/${value}`,{
       //   headers: {
       //     Authorization: `Bearer ${process.env.REACT_APP_JWT}`
@@ -91,7 +89,7 @@ function View(props) {
 
   return (
     <>
-      {star === 0 ? (
+      {star === 0|| star===1 ? (
         <Upload url={props.url} fetchPins={fetchPins} />
       ) : (
         <div>You don't have access to upload files</div>
@@ -105,11 +103,6 @@ function View(props) {
                 {/* {fileNames[value] || 'Loading...'} */}
                 {value}
               </a>
-              {/* {star === 0 ? (
-                <Delete index={index} value={value} fetchPins={fetchPins}/>
-              ) : (
-                <></>
-              )} */}
             </ul>
           ))
         }

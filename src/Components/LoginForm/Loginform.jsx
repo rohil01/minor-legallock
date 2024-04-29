@@ -16,11 +16,10 @@ class Loginform extends Component{
   async componentDidMount() {
     try {
       const admin = await minor.methods.admin().call();
-      this.setState({manager: admin});
-      console.log("Admins Address is: ", admin);
+      this.setState({manager: admin.toLowerCase()});
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       const add = accounts[0]; // Assuming user has at least one address  
-      this.setState({ userAddress: add }); // Use await to ensure state update
+      this.setState({ userAddress: add.toLowerCase() }); // Use await to ensure state update
       let index= await minor.methods.id(accounts[0]).call();
       this.setState({id:parseInt(index) - 1});
     } catch (error) {
@@ -36,17 +35,21 @@ class Loginform extends Component{
     event.preventDefault();
     setTimeout(async ()=>{
       if(!(this.state.id>=0) || parseInt((await minor.methods.members(this.state.id).call()).id)===0){
-        //show alert and redirect to register page
         alert("You are not registered. Please sign up first.");
         window.location.href = '/signup'; 
       }
       else{
       //redirect to next page
-        
         this.setState({loading:'redirecting to next page'})
         // Redirect to dashboard screen after a 5-second delay
+
+        if(this.state.userAddress==this.state.manager)
+        {
+          window.location.href='/admin';
+          console.log("admin")
+        }
         setTimeout(() => {
-          window.location.href = '/dashboard'; 
+          // window.location.href = '/dashboard'; 
           console.log("redirecting")
         }, 1000);
       }

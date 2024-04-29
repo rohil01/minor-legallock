@@ -15,7 +15,7 @@ const DashboardScreen = () => {
     <div className="dashboardScreen">
       <Navbar />
       <div className='uploadcase'>
-      <View />
+        <View />
       </div>
     </div>
   );

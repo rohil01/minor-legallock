@@ -4,7 +4,6 @@ import '../ipfs/view.css'
 import { upload } from '@testing-library/user-event/dist/upload';
 import CaseContract from '../../case';
 import web3 from '../../web3';
-
 function View(props) {
   const [selectedFile, setSelectedFile] = useState()
   // const [cid, setCid] = useState()

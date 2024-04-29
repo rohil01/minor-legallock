@@ -3,12 +3,15 @@ import {Input , Button} from 'semantic-ui-react'
 import { useState } from "react"
 import CaseFactory from "../../CaseFactory"
 import minor from '../../minor';
-import './view.css'
-function View(props) {
+import './insert.css'
+function Insert(props) {
     const [loading,setLoading] =useState('')
     const [formData, setFormData] = useState({
-        date: '',
-        address: ''
+        name: '',
+        adhaar: '',
+        age:'',
+        star: '',
+        address:''
       });
       const handleChange = (e) => {
         const { name, value } = e.target;
@@ -21,17 +24,13 @@ function View(props) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true)
-        const dateObject = new Date(formData.date);
-        console.log(dateObject);
-        const timestamp = dateObject.getTime();
-        console.log(timestamp);
         try {  
             const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-            const userAddress = await minor.methods.user(formData.address).call();
-            await CaseFactory.methods.createCase(userAddress,timestamp).send({
-                from:accounts[0]
-            })
-            window.location.href = '/dashboard';
+            await minor.methods.insert(formData.name,formData.adhaar,formData.age,formData.star,formData.address).send({
+              from: accounts[0]
+            });
+            alert("User Succefully Added")
+            window.location.href = '/admin/new';
         } catch (error) {
             console.log(error)
         }
@@ -40,19 +39,42 @@ function View(props) {
     return (
         <>
         <form className='viewcases' onSubmit={handleSubmit}>
-          <h1>Enter Your Case Basic Details: </h1>
+          <h1>Enter Members Data </h1>
 
           <div className='viewcases--inputbox1'>
-            <h3>Enter Date of filing of the case: </h3>
+            <h3>Enter Name </h3>
             <Input
-              type='datetime-local'
-              placeholder='Date Of Filing'
-              name='date'
+              type='input'
+              placeholder='Name'
+              name='name'
               onChange={handleChange}
               fluid
             />
           </div>
-          <h3>Enter Your Client's Adhaar Card: </h3>
+          <h3>Enter Adhaar Card: </h3>
+          
+          <div className='viewcases--inputbox2'>
+            <Input
+              type='input'
+              placeholder='Client Adhaar'
+              name='adhaar'
+              onChange={handleChange}
+              fluid
+            />
+          </div>
+          <h3>Enter Age: </h3>
+          
+          <div className='viewcases--inputbox2'>
+            <Input
+              type='input'
+              placeholder='Age'
+              name='age'
+              onChange={handleChange}
+              fluid
+            />
+          </div>
+          <h3>Enter Star: </h3>
+          <h3>Enter Address: </h3>
           
           <div className='viewcases--inputbox2'>
             <Input
@@ -68,4 +90,4 @@ function View(props) {
         </>
 );
 }
-export default View
+export default Insert

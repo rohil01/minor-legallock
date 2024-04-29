@@ -14,18 +14,17 @@ contract Minor {
         address add;
     }
     //star==0 judge, 1 lawyer, 2 student and others // -1 admin
-
+    mapping(uint => address) public user;
     member [] public members;
     constructor() {
         admin = msg.sender;
         member storage newMember= members.push();
         uint memberId= members.length;
-        
         newMember.name= "Admin";
-        newMember.adhaar=12345678912;
+        newMember.adhaar=123412341234;
         newMember.age=25;
         newMember.star=0;    
-        newMember.id= 1;   
+        newMember.id= 4;   
         newMember.add= admin;
         id[admin]= memberId;
     }
@@ -34,7 +33,7 @@ contract Minor {
     function insert(string memory name, uint adhaar, uint age, uint star, address add) public {
         require(msg.sender==admin);
         // id[msg.sender]=0;
-        
+        user[adhaar]=add;
         member storage newMember= members.push();
         uint memberId= members.length;
         
@@ -49,15 +48,22 @@ contract Minor {
 }   
 contract CaseFactory{
     address [] addressArray ;      
-    mapping (address => address []) cases; 
-    mapping (address => address []) clientcases;           //lawyer address=>array of all case addresses
+    mapping (address => address []) cases; //judges ke address ko accesss krne ke liye
+    mapping (address => address []) clientcases;    
+    address [] public admin;
+    function returnAdmin() public view returns(address [] memory)
+    {
+        return admin;
+    }
+           //lawyer address=>array of all case addresses
     uint public caseCnt=1;
-    
+    address [] public judges;
+    mapping(address=> address[]) judgecases;
     function createCase( address clientAddress , uint dateOfFiling) public{
-        
         address newCase = address(new Case(caseCnt, msg.sender,  clientAddress,   dateOfFiling));
         cases[msg.sender].push(newCase);   
-        clientcases[clientAddress].push(newCase);     //new case is the address of the case contract 
+        clientcases[clientAddress].push(newCase);
+        admin.push(newCase);     //new case is the address of the case contract 
         caseCnt++;
     }
     function returnAddress1(address addr) public view returns(address [] memory) {
@@ -69,8 +75,6 @@ contract CaseFactory{
     
 }
 contract Case{
-    
-
     struct details{
         uint caseid;
         uint dof;

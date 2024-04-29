@@ -28,6 +28,7 @@ function View(props) {
         try {  
             const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
             const userAddress = await minor.methods.user(formData.address).call();
+            
             await CaseFactory.methods.createCase(userAddress,timestamp).send({
                 from:accounts[0]
             })

@@ -24,7 +24,7 @@ const deploy = async () => {
   console.log("Minor Contract deployed to", result.options.address);
   const result2 = await new web3.eth.Contract(caseFactory.abi)
     .deploy({data:caseFactory.evm.bytecode.object})
-    .send({gas:"1406699", from:accounts[0]});
+    .send({gas:"2406699", from:accounts[0]});
 
   console.log("Case Factory deployed to ", result2.options.address);
   provider.engine.stop();

@@ -58,7 +58,8 @@ contract CaseFactory{
            //lawyer address=>array of all case addresses
     uint public caseCnt=1;
     address [] public judges;
-    mapping(address=> address[]) judgecases;
+    mapping(address=> address[]) public judgecases;
+    mapping(address=> address) public CaseToJudge;
     function createCase( address clientAddress , uint dateOfFiling) public{
         address newCase = address(new Case(caseCnt, msg.sender,  clientAddress,   dateOfFiling));
         cases[msg.sender].push(newCase);   
@@ -66,6 +67,10 @@ contract CaseFactory{
         admin.push(newCase);     //new case is the address of the case contract 
         caseCnt++;
     }
+    function assignJudge(address j, address c) public {
+        CaseToJudge[c]=j;
+        judgecases[j].push(c);
+    } 
     function returnAddress1(address addr) public view returns(address [] memory) {
         return (cases[addr]);
     } 

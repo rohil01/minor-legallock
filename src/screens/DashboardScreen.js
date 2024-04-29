@@ -23,6 +23,7 @@ class DashboardScreen extends React.Component {
     this.state = {
       cases: [],
       details: [],
+      star:''
     };
   }
 
@@ -31,6 +32,7 @@ class DashboardScreen extends React.Component {
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       const id = await minor.methods.id(accounts[0]).call();
       const userDetails = await minor.methods.members(parseInt(id) - 1).call();
+      this.setState({star:userDetails.star})
       if(userDetails.star==1)
       {
         const addresses = await CaseFactory.methods.returnAddress1(accounts[0]).call();
@@ -100,7 +102,12 @@ class DashboardScreen extends React.Component {
     return (
       <div className="dashboardScreen">
         <Navbar />
-        <button primary color='#1A4D2E' onClick={this.redirectToNewPage}>Create New Case</button>
+        {this.state.star==1?
+          <button primary color='#1A4D2E' onClick={this.redirectToNewPage}>Create New Case</button>
+          :
+          <></>
+        }
+        
         <Card.Group>{this.renderCases()}</Card.Group>
       </div>
     );

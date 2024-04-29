@@ -5,8 +5,6 @@ import { useParams } from 'react-router-dom';
 import Upload from './upload';
 import Delete from './delete';
 import CaseContract from '../../case';
-
-
 function View(props) {
   const [pin, setPin] = useState([]);
   const { id } = useParams();
@@ -22,11 +20,11 @@ function View(props) {
       try {
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
         const add = accounts[0]; // Assuming user has at least one address   
-            
         let id = await minor.methods.id(accounts[0]).call(); 
         id = parseInt(id);        
         const userStarValue = await minor.methods.members(id-1).call();
         setStar(parseInt(userStarValue.star));
+        console.log(userStarValue.star);
       } catch (error) {
         console.error('Error fetching user star value:', error);
       }      
@@ -42,7 +40,6 @@ function View(props) {
       let pinHashes = [];
       const Case = CaseContract(props.url);
       pinHashes = await Case.methods.fetchAddr().call();    
-
       console.log('Total pins fetched: ', pinHashes.length);
       setPin(pinHashes);
       setPinsFetched(true); // Set pinsFetched to true after fetching pins
@@ -60,40 +57,47 @@ function View(props) {
   useEffect(() => {
     if (pin.length >= 0) {
       setLoading(false); // Set loading to false when pins are fetched
-      fetchFileNames();
+      // fetchFileNames();
     }
   }, [pin]); // Run whenever pin value changes
 
-  const fetchFileNames = async () => {
-    const names = {};
-    for (const value of pin) {
-      // let x= await fetch(`https://${process.env.REACT_APP_URL}/ipfs/${value}`,{
-      //   headers: {
-      //     Authorization: `Bearer ${process.env.REACT_APP_JWT}`
-      //   }
-      // }).then(res => res.json()).then(data => {
-      // x = data;
-      // });
-      // const res = fetch(`http://${process.env.REACT_APP_URL}/ipfs/${value}`,{
-      //   headers: {
-      //     Authorization: `Bearer ${process.env.REACT_APP_JWT}`
-      //   }
-      // });
-      // const resData= await res.json();
+  // const fetchFileNames = async () => {
+  //   const names = {};
+  //   for (const value of pin) {
+  //     let x= await fetch(`https://${process.env.REACT_APP_URL}/ipfs/${value}`,{
+  //       headers: {
+  //         Authorization: `Bearer ${process.env.REACT_APP_JWT}`
+  //       }
+  //     }).then(res => res.json()).then(data => {
+  //     x = data;
+  //     });
+  //     const res = fetch(`http://${process.env.REACT_APP_URL}/ipfs/${value}`,{
+  //       headers: {
+  //         Authorization: `Bearer ${process.env.REACT_APP_JWT}`
+  //       }
+  //     });
+  //     const resData= await res.json();
       
-      // console.log(resData);
-      // names[value] = resData.name; // Assuming the name is present in the fetched data
-    }
-    setFileNames(names);
-  };
+  //     console.log(resData);
+  //     names[value] = resData.name; // Assuming the name is present in the fetched data
+  //   }
+  //   setFileNames(names);
+  // };
 
   return (
     <>
+      
       {star === 0|| star===1 ? (
         <Upload url={props.url} fetchPins={fetchPins} />
       ) : (
         <div>You don't have access to upload files</div>
       )}
+      {star === 4 ? (
+        <div className='admin-container'>FUckk</div>
+      ) : (
+        <div>You don't have access to upload files</div>
+      )}
+
       <div className="file-container">
         <h2>Files List:</h2>
         {
@@ -106,7 +110,9 @@ function View(props) {
             </ul>
           ))
         }
+        
       </div>
+      
     </>
   );
 }

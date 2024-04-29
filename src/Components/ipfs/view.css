@@ -11,7 +11,7 @@
 }
 
 .upload-container,
-.file-container {
+.file-container , .admin-container{
   display: flex;
   flex-direction: column;
   padding: 15px 20px;

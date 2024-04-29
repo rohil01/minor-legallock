@@ -37,6 +37,7 @@ class Admin extends React.Component {
     const fetchData = async () => {
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       const addresses = await CaseFactory.methods.returnAdmin().call();
+      this.setState({ cases: addresses });
     };
 
     fetchData();
@@ -83,15 +84,6 @@ class Admin extends React.Component {
           <Card.Description>
             {"Timestamp: "}
             <FormattedTimestamp timestamp={detail.dof} />
-          </Card.Description>
-          <Card.Description>
-            <Input
-              type='input'
-              placeholder='Client Address'
-              name='address'
-              onChange={this.handleChange}
-              fluid
-            />
           </Card.Description>
         </Card.Content>
         

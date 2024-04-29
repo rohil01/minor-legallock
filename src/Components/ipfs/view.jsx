@@ -1,20 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import '../ipfs/view.css';
+import { Button, Card ,Input} from 'semantic-ui-react';
+
 import minor from '../../minor';
 import { useParams } from 'react-router-dom';
 import Upload from './upload';
 import Delete from './delete';
 import CaseContract from '../../case';
+import CaseFactory from '../../CaseFactory'
 function View(props) {
   const [pin, setPin] = useState([]);
   const { id } = useParams();
   const [star, setStar] = useState(0);
   const [pinsFetched, setPinsFetched] = useState(false); // State to track if pins have been fetched
   const [loading, setLoading] = useState(true); // State to track loading state
-  const [fileNames, setFileNames] = useState({}); // State to store file names
-
+  const [address,setAddress] = useState()
+  const [jud,setJ]=useState();
   const fetch = require("node-fetch");
-
+  const [fun, setF] =useState("0x0000000000000000000000000000000000000000")
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    console.log(value);
+    setAddress(value);
+  };
   useEffect(() => {
     const fetchStar = async () => {
       try {
@@ -25,6 +33,10 @@ function View(props) {
         const userStarValue = await minor.methods.members(id-1).call();
         setStar(parseInt(userStarValue.star));
         console.log(userStarValue.star);
+        
+        const judge= await CaseFactory.methods.CaseToJudge(props.url).call();
+        
+        setJ((judge))
       } catch (error) {
         console.error('Error fetching user star value:', error);
       }      
@@ -60,30 +72,12 @@ function View(props) {
       // fetchFileNames();
     }
   }, [pin]); // Run whenever pin value changes
-
-  // const fetchFileNames = async () => {
-  //   const names = {};
-  //   for (const value of pin) {
-  //     let x= await fetch(`https://${process.env.REACT_APP_URL}/ipfs/${value}`,{
-  //       headers: {
-  //         Authorization: `Bearer ${process.env.REACT_APP_JWT}`
-  //       }
-  //     }).then(res => res.json()).then(data => {
-  //     x = data;
-  //     });
-  //     const res = fetch(`http://${process.env.REACT_APP_URL}/ipfs/${value}`,{
-  //       headers: {
-  //         Authorization: `Bearer ${process.env.REACT_APP_JWT}`
-  //       }
-  //     });
-  //     const resData= await res.json();
-      
-  //     console.log(resData);
-  //     names[value] = resData.name; // Assuming the name is present in the fetched data
-  //   }
-  //   setFileNames(names);
-  // };
-
+  const onsubmit= async ()=>{
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    await CaseFactory.methods.assignJudge(address, props.url).send({
+      from: accounts[0]
+    })
+  }
   return (
     <>
       
@@ -92,10 +86,31 @@ function View(props) {
       ) : (
         <div>You don't have access to upload files</div>
       )}
-      {star === 4 ? (
-        <div className='admin-container'>FUckk</div>
+      {(star === 4 && jud===fun) ? (
+        <div className='admin-container'>
+        <h2>Enter Judge Address: (Wallet Address)</h2>
+        <Input
+          type='input'
+          placeholder='Address'
+          name='star'
+          onChange={handleChange}
+          fluid
+        />
+        <Button onClick={onsubmit}>Submit data</Button>
+    </div>
+        
+        
       ) : (
-        <div>You don't have access to upload files</div>
+        <div></div>
+      )}
+      {(star === 4 && jud!==fun) ? (
+        <div className='admin-container'>
+          <div>Judge Address is: {jud}</div>
+        </div>
+        
+        
+      ) : (
+        <div></div>
       )}
 
       <div className="file-container">

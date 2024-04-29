@@ -23,8 +23,8 @@ contract Minor {
         newMember.name= "Admin";
         newMember.adhaar=123412341234;
         newMember.age=25;
-        newMember.star=0;    
-        newMember.id= 4;   
+        newMember.star=4;    
+        newMember.id= 1;   
         newMember.add= admin;
         id[admin]= memberId;
     }

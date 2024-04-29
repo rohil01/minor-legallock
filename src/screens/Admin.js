@@ -62,9 +62,6 @@ class Admin extends React.Component {
       fetchDetails();
     }
   }
-  assignJudge(){
-
-  }
   renderCases = () => {
     return this.state.details.map((detail, index) => (
       <Card key={index} href={`/dashboard/cases/${this.state.cases[index]}`}>

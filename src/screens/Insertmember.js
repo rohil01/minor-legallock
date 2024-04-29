@@ -8,7 +8,7 @@ class Insertmember extends React.Component {
   render() {
     return (
       <>
-        <Navbar />
+        {/* <Navbar /> */}
         <Insert />
 
       </>

@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/minor-legallock/static/css/main.3fb44cf7.css",
-    "main.js": "/minor-legallock/static/js/main.9e162bc6.js",
+    "main.js": "/minor-legallock/static/js/main.d966b0a2.js",
     "static/media/home.jpg": "/minor-legallock/static/media/home.6e0b29cf618780820432.jpg",
     "static/media/login.jpg": "/minor-legallock/static/media/login.8545d406f8099d11538c.jpg",
     "static/media/lawyer.jpg": "/minor-legallock/static/media/lawyer.880afae29614c83d1d67.jpg",
@@ -26,10 +26,10 @@
     "static/media/metamask.svg": "/minor-legallock/static/media/metamask.95441491d5b64b0eb84cd6ee0fd67bb8.svg",
     "index.html": "/minor-legallock/index.html",
     "main.3fb44cf7.css.map": "/minor-legallock/static/css/main.3fb44cf7.css.map",
-    "main.9e162bc6.js.map": "/minor-legallock/static/js/main.9e162bc6.js.map"
+    "main.d966b0a2.js.map": "/minor-legallock/static/js/main.d966b0a2.js.map"
   },
   "entrypoints": [
     "static/css/main.3fb44cf7.css",
-    "static/js/main.9e162bc6.js"
+    "static/js/main.d966b0a2.js"
   ]
 }

@@ -23,7 +23,7 @@ const App = () => {
     <div >
     <Router>
       <Routes>
-        <Route path="/" element={<LoginScreen />} />
+        <Route path="/minor-legallock" element={<LoginScreen />} />
         <Route path="/signup" element={<SignupForm />} />
         <Route path="/dashboard" element={<DashboardScreen />} />
         <Route path="/dashboard/new" element={<UploadCase />} />

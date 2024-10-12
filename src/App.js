@@ -7,6 +7,7 @@ import Profile from './Components/Profilepage/Profile';
 import Home from './Components/Home/Home';
 import View from './Components/ipfs/view';
 import ViewFile from './screens/viewFile';
+
 import UploadCase from './screens/uploadcase.jsx'
 import Caseview from './screens/Caseview.js' //here
 import Admin from './screens/Admin.js'

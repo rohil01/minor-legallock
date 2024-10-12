@@ -13,8 +13,8 @@ contract Minor {
         uint star;
         address add;
     }
-    //star==0 judge, 1 lawyer, 2 student and others // -1 admin
-    mapping(uint => address) public user;
+    //star==0 judge, 1 lawyer, 2 student and others // 4 admin
+    mapping(uint => address) public user;   //aadhar to address
     member [] public members;
     constructor() {
         admin = msg.sender;
@@ -28,7 +28,7 @@ contract Minor {
         newMember.add= admin;
         id[admin]= memberId;
     }
-    mapping ( address=> uint ) public id;
+    mapping ( address=> uint ) public id; 
 
     function insert(string memory name, uint adhaar, uint age, uint star, address add) public {
         require(msg.sender==admin);
@@ -48,7 +48,7 @@ contract Minor {
 }   
 contract CaseFactory{
     address [] addressArray ;      
-    mapping (address => address []) cases; //judges ke address ko accesss krne ke liye
+    mapping (address => address []) cases; //lawyers ke address ko accesss krne ke liye
     mapping (address => address []) clientcases;    
     address [] public admin;
     function returnAdmin() public view returns(address [] memory)

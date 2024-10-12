@@ -19,17 +19,17 @@ const App = () => {
     <div >
     <Router>
       <Routes>
-        <Route path="/minor-legallock" element={<LoginScreen />} />
-        <Route path="/minor-legallock/signup" element={<SignupForm />} />
-        <Route path="/minor-legallock/dashboard" element={<DashboardScreen />} />
-        <Route path="/minor-legallock/dashboard/new" element={<UploadCase />} />
-        <Route path="/minor-legallock/viewfile" element={<ViewFile />} /> 
-        <Route path="/minor-legallock/view" element={<View />} /> 
-        <Route path="/minor-legallock/dashboard/cases/:url" element={<Caseview />} />
-        <Route path="/minor-legallock/profile/:id" element={<Profile />} />
-        <Route path="/minor-legallock/Home" element={<Home />} />
-        <Route path="/minor-legallock/admin" element={<Admin/>} />
-        <Route path="/minor-legallock/admin/new" element={<Insert />} />
+        <Route path="/" element={<LoginScreen />} />
+        <Route path="/signup" element={<SignupForm />} />
+        <Route path="/dashboard" element={<DashboardScreen />} />
+        <Route path="/dashboard/new" element={<UploadCase />} />
+        <Route path="/viewfile" element={<ViewFile />} /> 
+        <Route path="/view" element={<View />} /> 
+        <Route path="/dashboard/cases/:url" element={<Caseview />} />
+        <Route path="/profile/:id" element={<Profile />} />
+        <Route path="/Home" element={<Home />} />
+        <Route path="/admin" element={<Admin/>} />
+        <Route path="/admin/new" element={<Insert />} />
       </Routes>
     </Router>
     </div>
